@@ -1,0 +1,332 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "taxable_profits",
+      "logical_name": "monthly_taxable_profits",
+      "n_rows": 132,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "period_end",
+          "logical_name": "period_end_date",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "End date of the monthly period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no period",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD (last day of month)",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Taxable Profits",
+          "logical_name": "taxable_profit_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Monthly taxable profit or loss in USD. Negative values indicate tax losses.",
+            "unit": "$",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no profit data",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -531813,
+            "max": 549492,
+            "mean": 11707.0,
+            "median": 13644.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.023,
+              "n_outliers": 3,
+              "top_1_outlier": -531813
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Taxable Profits Profile",
+        "block_id": "assumptions.taxable_profits",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "D13:EN13"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "tax_rates",
+      "logical_name": "tax_rate_schedule",
+      "n_rows": 13,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "rate_id",
+          "logical_name": "rate_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Label for each tax rate band.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no rate",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "date_start",
+          "logical_name": "rate_start_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Start date from which this tax rate applies.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "start date not set",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "date_end",
+          "logical_name": "rate_end_date",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "End date up to which this tax rate applies. The last rate has value 'Onwards' indicating no end date.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "rate continues indefinitely",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 0.923,
+            "type_consistency": 0.923,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 0.923,
+            "format_hint": "YYYY-MM-DD or 'Onwards'",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "tax_rate",
+          "logical_name": "tax_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Tax rate as a decimal fraction.",
+            "unit": "%",
+            "value_type": "continuous",
+            "expected_range": [0.11, 0.19],
+            "higher_is_better": null,
+            "missing_value_meaning": "rate not set",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.11,
+            "max": 0.19,
+            "mean": 0.152,
+            "median": 0.15,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Rates Table",
+        "block_id": "assumptions.tax_rates",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "D20:I32"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "tax_payment_schedule",
+      "logical_name": "tax_payment_schedule",
+      "n_rows": 3,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "payment_label",
+          "logical_name": "payment_label",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Label for the tax payment installment.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no payment",
+            "allowed_categories": ["First Payment", "Second Payment", "Third Payment"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "payment_month_number",
+          "logical_name": "payment_month_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Month number (1-12) in the subsequent year when the payment is due.",
+            "unit": "month",
+            "value_type": "integer",
+            "expected_range": [1, 12],
+            "higher_is_better": null,
+            "missing_value_meaning": "no month",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 4,
+            "max": 12,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "portion_of_bill",
+          "logical_name": "portion_of_bill",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Fraction of the annual tax bill paid in this installment.",
+            "unit": "%",
+            "value_type": "continuous",
+            "expected_range": [0.0, 1.0],
+            "higher_is_better": null,
+            "missing_value_meaning": "no payment",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.15,
+            "max": 0.6,
+            "mean": 0.333,
+            "median": 0.25,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.333,
+              "n_outliers": 1,
+              "top_1_outlier": 0.6
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Tax Year and Payment Assumptions",
+        "block_id": "assumptions.tax_payment_schedule",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "D39:I41"
+      }
+    }
+  ],
+  "relations": [],
+  "dataset_summary": {
+    "plain_description": "ModelOff 2015 Round 1 Section 3 tax calculation dataset. Contains 132 months of taxable profit/loss data (January 2015 to December 2025), a 13-band tax rate schedule with date ranges, tax payment installment schedule, and a 2-year tax loss expiry parameter.",
+    "n_tables": 3,
+    "notes": "Taxable profits are normalized from a wide monthly time series. The tax rate schedule's last entry uses 'Onwards' rather than an end date. Losses expire after 2 years per section 1.04."
+  }
+}

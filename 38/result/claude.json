@@ -1,0 +1,258 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "operational_parameters",
+      "logical_name": "operational_parameters",
+      "n_rows": 10,
+      "profile": {
+        "density": 0.9
+      },
+      "columns": [
+        {
+          "physical_name": "parameter_name",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the operational assumption parameter.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no parameter",
+            "allowed_categories": ["Small system cost (USD)", "Large system cost (USD)", "Installation per system", "Small system capacity", "Large system capacity", "Generation when new (kWh/kW/day)", "Annual degradation", "Small system: Tariff A usage per day", "Large system: Tariff A usage per day", "Tariff A price in base year", "Tariff B price in base year", "Tariff A escalation per annum", "Tariff B escalation per annum"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Unit of measurement for the parameter.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "dimensionless",
+            "allowed_categories": ["[US$]", "[AU$]", "[kW/system]", "[kWh/kW/day]", "[% p.a.]", "[kWh/day/system]", "[AU$/kWh]"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Operational Assumptions",
+        "block_id": "assumptions.operational_parameters",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "B10:C32"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "installation_exchange_rate",
+      "logical_name": "monthly_installation_and_exchange_rate",
+      "n_rows": 24,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Month",
+          "logical_name": "month",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "First day of the month for which installation and exchange rate data applies.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Number of Small systems installed",
+          "logical_name": "small_systems_installed",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of small solar systems installed in that month.",
+            "unit": "systems",
+            "value_type": "integer",
+            "expected_range": [37, 94],
+            "higher_is_better": null,
+            "missing_value_meaning": "no installation",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 37,
+            "max": 94,
+            "mean": 65.5,
+            "median": 65.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Number of Large systems installed",
+          "logical_name": "large_systems_installed",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of large solar systems installed in that month.",
+            "unit": "systems",
+            "value_type": "integer",
+            "expected_range": [33, 67],
+            "higher_is_better": null,
+            "missing_value_meaning": "no installation",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 33,
+            "max": 67,
+            "mean": 50.0,
+            "median": 50.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "AUD_per_USD",
+          "logical_name": "aud_per_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Exchange rate: 1 AUD equals this many USD.",
+            "unit": "USD per AUD",
+            "value_type": "continuous",
+            "expected_range": [0.817, 1.105],
+            "higher_is_better": null,
+            "missing_value_meaning": "rate not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.817,
+            "max": 1.055,
+            "mean": 0.952,
+            "median": 0.946,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "USD_per_AUD",
+          "logical_name": "usd_per_aud",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Exchange rate: 1 USD equals this many AUD.",
+            "unit": "AUD per USD",
+            "value_type": "continuous",
+            "expected_range": [0.95, 1.225],
+            "higher_is_better": null,
+            "missing_value_meaning": "rate not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.952,
+            "max": 1.224,
+            "mean": 1.056,
+            "median": 1.057,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Installation Assumptions and Exchange Rate Assumptions",
+        "block_id": "assumptions.installation_exchange_rate",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "C36:G60"
+      }
+    }
+  ],
+  "relations": [],
+  "dataset_summary": {
+    "plain_description": "Energy operations workbook for ModelOff 2013 Round 1. Contains operational assumptions for small and large solar systems (costs, capacity, revenues, tariff rates) and a 24-month table of monthly system installations alongside AUD/USD exchange rates.",
+    "n_tables": 2,
+    "notes": "The operational_parameters table captures scalar key-value assumptions. The monthly installation and exchange rate table covers July 2013 through June 2015."
+  }
+}

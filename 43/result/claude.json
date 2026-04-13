@@ -1,0 +1,316 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "assumptions",
+      "logical_name": "financial_model_assumptions",
+      "n_rows": 44,
+      "profile": {
+        "density": 0.7
+      },
+      "columns": [
+        {
+          "physical_name": "assumption_name",
+          "logical_name": "assumption_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the financial model assumption (income statement, asset, liability, or equity assumption).",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no assumption",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "period",
+          "logical_name": "period",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Time period for the assumption value (Year -1, Year 0, Year 1 through Year 5). Year -1 and Year 0 are historical; Years 1-5 are projections.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no period",
+            "allowed_categories": ["Year -1", "Year 0", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Numeric value of the assumption for that period.",
+            "unit": "mixed (ratios, dollar amounts, shares)",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption not applicable for this period",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -328.0,
+            "max": 1269.0,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Inputs",
+        "block_id": "assumptions.model_assumptions",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "A2:I47"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "income_statement",
+      "logical_name": "income_statement",
+      "n_rows": 112,
+      "profile": {
+        "density": 0.85
+      },
+      "columns": [
+        {
+          "physical_name": "line_item",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Income statement line item name.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "period",
+          "logical_name": "period",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Time period (Year -1 through Year 5).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no period",
+            "allowed_categories": ["Year -1", "Year 0", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "amount",
+          "logical_name": "amount_million_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Value of the income statement line item in millions of USD.",
+            "unit": "$m",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "not applicable or formula error",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 0.95,
+            "type_consistency": 0.95,
+            "min": -328.0,
+            "max": 15209.29,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "IncState",
+        "anchor_text": "Income statement",
+        "block_id": "incstate.income_statement",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "A2:I239"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "balance_sheet",
+      "logical_name": "balance_sheet",
+      "n_rows": 168,
+      "profile": {
+        "density": 0.82
+      },
+      "columns": [
+        {
+          "physical_name": "line_item",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Balance sheet line item name.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "period",
+          "logical_name": "period",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Time period (Year -1 through Year 5).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no period",
+            "allowed_categories": ["Year -1", "Year 0", "Year 1", "Year 2", "Year 3", "Year 4", "Year 5"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "amount",
+          "logical_name": "amount_million_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Balance sheet amount in millions of USD. Some projected cells contain #REF! formula errors (the intentional errors in the 'Find That Error' exercise).",
+            "unit": "$m",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "formula error or not applicable",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 0.75,
+            "type_consistency": 0.75,
+            "min": 161.0,
+            "max": 19743.67,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "BalSheet",
+        "anchor_text": "Balance sheet",
+        "block_id": "balsheet.balance_sheet",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "A2:I228"
+      }
+    }
+  ],
+  "relations": [],
+  "dataset_summary": {
+    "plain_description": "ModelOff 'Find That Error' Case Study 3 financial model for a furniture company (7 periods: Year -1 and Year 0 historical, Years 1-5 projected). Contains income statement assumptions, calculated income statement, balance sheet, debt schedule, and cash flow statement. The workbook intentionally contains formula errors for a debugging exercise.",
+    "n_tables": 3,
+    "notes": "The BalSheet and CashFlow sheets contain deliberate #REF! formula errors as part of the 'Find That Error' exercise. All financial figures are in millions of USD."
+  }
+}

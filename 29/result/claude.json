@@ -1,0 +1,393 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "widget_definitions",
+      "logical_name": "widget_definitions",
+      "n_rows": 8,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "widget_name",
+          "logical_name": "widget_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the widget product.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no widget",
+            "allowed_categories": ["Widget A", "Widget B", "Widget C", "Widget D", "Widget E", "Widget F", "Widget G", "Widget H"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "category",
+          "logical_name": "price_category",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Price category of the widget (Low value, Mid value, or High value).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no category",
+            "allowed_categories": ["Low value", "Mid value", "High value"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Widget categories",
+        "block_id": "inputs.widget_definitions",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "C47:D55"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "sales_volumes",
+      "logical_name": "annual_sales_volumes",
+      "n_rows": 120,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "widget_name",
+          "logical_name": "widget_name",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Widget product name.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no widget",
+            "allowed_categories": ["Widget A", "Widget B", "Widget C", "Widget D", "Widget E", "Widget F", "Widget G", "Widget H"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year number (1 = FY2016, ..., 15 = FY2030).",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [1, 15],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 15,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "sales_volume_m_units",
+          "logical_name": "sales_volume_million_units",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Annual sales volume for the widget in millions of units.",
+            "unit": "units ms",
+            "value_type": "continuous",
+            "expected_range": [25, 230],
+            "higher_is_better": null,
+            "missing_value_meaning": "no sales",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 25.0,
+            "max": 229.89,
+            "mean": 84.51,
+            "median": 62.57,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Revenue Volume Assumptions",
+        "block_id": "inputs.sales_volumes",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C36:T44"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "pricing_base",
+      "logical_name": "annual_unit_pricing_base_scenario",
+      "n_rows": 45,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "price_category",
+          "logical_name": "price_category",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Price category (Low value, Mid value, High value) for which this unit price applies.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no category",
+            "allowed_categories": ["Low value", "Mid value", "High value"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year number (1-15).",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [1, 15],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 15,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "unit_price_usd",
+          "logical_name": "unit_price_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Nominal unit price in USD per unit for this category in this year (Base scenario).",
+            "unit": "$ / unit",
+            "value_type": "continuous",
+            "expected_range": [60.0, 232.0],
+            "higher_is_better": null,
+            "missing_value_meaning": "no price",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 60.0,
+            "max": 231.32,
+            "mean": 130.45,
+            "median": 118.98,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Revenue Pricing Assumptions",
+        "block_id": "inputs.pricing_base",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C60:T62"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "scalar_assumptions",
+      "logical_name": "scalar_financial_assumptions",
+      "n_rows": 10,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "parameter_name",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the scalar financial assumption.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no parameter",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric value of the scalar assumption.",
+            "unit": "mixed",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.2,
+            "max": 14.0,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Revenue Pricing Assumptions",
+        "block_id": "inputs.scalar_assumptions",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "C69:E109"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": ["widget_name"],
+      "child_key": ["widget_name"]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T1",
+      "child_table_id": "T3",
+      "parent_key": ["price_category"],
+      "child_key": ["price_category"]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "ModelOff 2014 Round 2 widget company financial model inputs. Contains 8 widget product definitions with price categories, 15-year annual sales volume forecasts for each widget, per-category unit pricing schedules (Base and Growth scenarios), and scalar financial assumptions (COGS rates, overheads, working capital, capex, depreciation, financing).",
+    "n_tables": 4,
+    "notes": "Sales volumes and pricing are normalized from wide 15-year time series. Forecasts start FY2016 (year ending June 30, 2016)."
+  }
+}

@@ -1,0 +1,1834 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "CaseParameters",
+      "logical_name": "case_parameters",
+      "n_rows": 1,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "case_id",
+          "logical_name": "case_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Identifier for this investment case model.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no case identifier",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "purchase_price_cap",
+          "logical_name": "purchase_price_cap",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Maximum total purchase price allowed for a selected investment portfolio.",
+            "unit": "USD",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              5000000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no cap specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1700000,
+            "max": 1700000,
+            "mean": 1700000.0,
+            "median": 1700000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "purchase_date",
+          "logical_name": "purchase_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Date when purchase prices are paid (transaction date for acquiring properties).",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "purchase date not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "model_periodicity",
+          "logical_name": "model_periodicity",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Time granularity used for the cashflow model.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "periodicity not specified",
+            "allowed_categories": [
+              "monthly"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "payments_timing",
+          "logical_name": "payments_timing",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Convention for when cashflows occur within each modeled period.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "timing convention not specified",
+            "allowed_categories": [
+              "end_of_period"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "npv_method",
+          "logical_name": "npv_method",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "NPV computation convention/function referenced by the workbook narrative.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "npv method not specified",
+            "allowed_categories": [
+              "XNPV"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "index_base_date",
+          "logical_name": "index_base_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Base date for indexation (inflation) calculations.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "index base date not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "index_step_frequency",
+          "logical_name": "index_step_frequency",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "How often indexation rates step forward.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "index step frequency not specified",
+            "allowed_categories": [
+              "annual_step"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "index_first_apply_date",
+          "logical_name": "index_first_apply_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "First date when a full year of indexation is applied.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "first index apply date not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "discount_rate",
+          "logical_name": "discount_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Discount rate used as the cost of capital for valuation.",
+            "unit": "fraction",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "discount rate not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.08,
+            "max": 0.08,
+            "mean": 0.08,
+            "median": 0.08,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "alt_discount_rate",
+          "logical_name": "alt_discount_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Alternative discount rate used for sensitivity analysis.",
+            "unit": "fraction",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "alternative discount rate not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.04,
+            "max": 0.04,
+            "mean": 0.04,
+            "median": 0.04,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "valuation_base_date",
+          "logical_name": "valuation_base_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Base date for discounting / valuation reference point.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "valuation base date not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Assumptions",
+        "block_id": "assumptions.global_case_parameters",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "C13:I113"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Properties",
+      "logical_name": "properties",
+      "n_rows": 5,
+      "profile": {
+        "density": 0.7555555555555555
+      },
+      "columns": [
+        {
+          "physical_name": "property_variant_id",
+          "logical_name": "property_variant_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique identifier for each investable property variant (including mutually exclusive options).",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no property variant id",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "base_property_id",
+          "logical_name": "base_property_id",
+          "dtype": "integer",
+          "role": "id",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Base property identifier grouping variants that refer to the same underlying property.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              4
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no base property id",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 4,
+            "mean": 2.8,
+            "median": 3.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "purchase_price",
+          "logical_name": "purchase_price",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Upfront purchase price paid on the purchase date (excluded from ongoing cashflows).",
+            "unit": "USD",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              5000000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "purchase price not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 450000,
+            "max": 550000,
+            "mean": 488000.0,
+            "median": 470000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "investment_length_years",
+          "logical_name": "investment_length_years",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Holding period length for the investment.",
+            "unit": "years",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              50
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "investment length not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 4.0,
+            "max": 6.0,
+            "mean": 4.9,
+            "median": 5.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "terminal_value",
+          "logical_name": "terminal_value",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Terminal sale value received at the end of the investment length (not indexed).",
+            "unit": "USD",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              10000000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "terminal value not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 500000,
+            "max": 675000,
+            "mean": 574000.0,
+            "median": 570000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "has_overhaul",
+          "logical_name": "has_overhaul",
+          "dtype": "boolean",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Whether this property variant includes an overhaul event during the holding period.",
+            "unit": "",
+            "value_type": "boolean",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "overhaul flag missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 0.8,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "overhaul_cost",
+          "logical_name": "overhaul_cost",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "One-time overhaul cost paid on the overhaul date (not part of purchase price cap).",
+            "unit": "USD",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              10000000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no overhaul cost / not applicable",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 125000,
+            "max": 125000,
+            "mean": 125000.0,
+            "median": 125000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "overhaul_payment_date",
+          "logical_name": "overhaul_payment_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Date when the overhaul cost is paid, if applicable.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no overhaul date / not applicable",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "mutual_exclusion_group",
+          "logical_name": "mutual_exclusion_group",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Group label indicating variants that cannot both be selected in the same portfolio.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no exclusion group",
+            "allowed_categories": [
+              "property_4_option"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Purchase prices",
+        "block_id": "assumptions.property_variants",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "C15:I42"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "RevenueTerms",
+      "logical_name": "revenue_terms",
+      "n_rows": 6,
+      "profile": {
+        "density": 0.9242424242424242
+      },
+      "columns": [
+        {
+          "physical_name": "revenue_term_id",
+          "logical_name": "revenue_term_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique identifier for a revenue term/phase definition.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no revenue term id",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "property_variant_id",
+          "logical_name": "property_variant_id",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Property variant this revenue term applies to.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unlinked revenue term",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "phase",
+          "logical_name": "phase",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Phase label describing when the term applies (e.g., before/after overhaul).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "phase not specified",
+            "allowed_categories": [
+              "standard",
+              "pre_overhaul",
+              "post_overhaul"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 0.6666666666666666,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "annual_amount",
+          "logical_name": "annual_amount",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Nominal revenue amount per year before indexation and payment scheduling.",
+            "unit": "USD/year",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              10000000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "annual revenue not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 45000,
+            "max": 75000,
+            "mean": 57500.0,
+            "median": 57500.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "payments_per_year",
+          "logical_name": "payments_per_year",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of revenue payments per year (determines payment frequency).",
+            "unit": "count/year",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "payments per year not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 4,
+            "max": 12,
+            "mean": 8.666666666666666,
+            "median": 12.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "payment_frequency",
+          "logical_name": "payment_frequency",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived payment frequency label based on payments_per_year.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "payment frequency not specified",
+            "allowed_categories": [
+              "monthly",
+              "quarterly",
+              "other"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 0.6666666666666666,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "first_payment_month",
+          "logical_name": "first_payment_month",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Month number (1-12) of the first revenue payment in a calendar year.",
+            "unit": "month",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "first payment month not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 3,
+            "mean": 1.3333333333333333,
+            "median": 1.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "indexed",
+          "logical_name": "indexed",
+          "dtype": "boolean",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Whether the revenue term is subject to indexation based on indexation_rate and global rules.",
+            "unit": "",
+            "value_type": "boolean",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "indexation applicability not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 0.5,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "indexation_rate",
+          "logical_name": "indexation_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Annual indexation rate applied according to global indexation rules (stored as a decimal fraction).",
+            "unit": "fraction",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no indexation rate provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.0,
+            "max": 0.03,
+            "mean": 0.0125,
+            "median": 0.01,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "effective_start_date",
+          "logical_name": "effective_start_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Start date when this revenue term becomes effective.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "start date not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "effective_end_date",
+          "logical_name": "effective_end_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "End date (inclusive) for the applicability of this revenue term; null means it continues through the holding period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no end date / continues",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Revenues",
+        "block_id": "assumptions.revenue_terms",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "C48:I78"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "CostTerms",
+      "logical_name": "cost_terms",
+      "n_rows": 6,
+      "profile": {
+        "density": 0.5980392156862745
+      },
+      "columns": [
+        {
+          "physical_name": "cost_term_id",
+          "logical_name": "cost_term_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique identifier for an operating cost term/phase definition.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no cost term id",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "property_variant_id",
+          "logical_name": "property_variant_id",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Property variant this operating cost term applies to.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unlinked cost term",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "phase",
+          "logical_name": "phase",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Phase label describing when the term applies (e.g., before/after overhaul).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "phase not specified",
+            "allowed_categories": [
+              "standard",
+              "pre_overhaul",
+              "post_overhaul"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 0.6666666666666666,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "cost_basis_type",
+          "logical_name": "cost_basis_type",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Specification style for operating costs (percentage of revenue vs fixed schedule).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "cost basis type not specified",
+            "allowed_categories": [
+              "percent_of_revenue",
+              "fixed_annual",
+              "fixed_payments"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 0.6666666666666666,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "percent_of_revenue",
+          "logical_name": "percent_of_revenue",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "If costs are specified as a percentage of revenue, this is the fraction applied to revenue.",
+            "unit": "fraction",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "not a percent-of-revenue cost",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.05,
+            "max": 0.08,
+            "mean": 0.065,
+            "median": 0.065,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "annual_amount",
+          "logical_name": "annual_amount",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "If costs are specified as a fixed annual amount, this is the nominal amount per year (before indexation).",
+            "unit": "USD/year",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              10000000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "not a fixed-annual cost",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 3000,
+            "max": 4500,
+            "mean": 3500.0,
+            "median": 3000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "payments_per_year",
+          "logical_name": "payments_per_year",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Number of cost payments per year for fixed schedules.",
+            "unit": "count/year",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "payments per year not applicable",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2,
+            "max": 12,
+            "mean": 9.5,
+            "median": 12.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "payment_frequency",
+          "logical_name": "payment_frequency",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Derived payment frequency label for fixed schedules.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "payment frequency not specified",
+            "allowed_categories": [
+              "monthly",
+              "quarterly",
+              "semiannual",
+              "other"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 0.75,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "first_payment_month",
+          "logical_name": "first_payment_month",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Month number (1-12) of the first cost payment in a calendar year for evenly spaced schedules.",
+            "unit": "month",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "first payment month not applicable",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 1,
+            "mean": 1.0,
+            "median": 1.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "payment1_amount",
+          "logical_name": "payment1_amount",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Amount of the first fixed payment (for multi-payment schedules).",
+            "unit": "USD",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              10000000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "payment 1 not applicable",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1000,
+            "max": 1000,
+            "mean": 1000.0,
+            "median": 1000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "payment1_month",
+          "logical_name": "payment1_month",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Month number (1-12) when the first fixed payment is made.",
+            "unit": "month",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "payment month 1 not applicable",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 4,
+            "max": 4,
+            "mean": 4.0,
+            "median": 4.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "payment2_amount",
+          "logical_name": "payment2_amount",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Amount of the second fixed payment (for multi-payment schedules).",
+            "unit": "USD",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              10000000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "payment 2 not applicable",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 3000,
+            "max": 3000,
+            "mean": 3000.0,
+            "median": 3000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "payment2_month",
+          "logical_name": "payment2_month",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Month number (1-12) when the second fixed payment is made.",
+            "unit": "month",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "payment month 2 not applicable",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 10,
+            "max": 10,
+            "mean": 10.0,
+            "median": 10.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": null,
+              "n_outliers": null,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "indexed",
+          "logical_name": "indexed",
+          "dtype": "boolean",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Whether the operating cost term is subject to indexation based on indexation_rate and global rules.",
+            "unit": "",
+            "value_type": "boolean",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "indexation applicability not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 0.6666666666666666,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "indexation_rate",
+          "logical_name": "indexation_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Annual indexation rate applied to operating costs when indexed (stored as a decimal fraction).",
+            "unit": "fraction",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no indexation rate / not indexed",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.01,
+            "max": 0.03,
+            "mean": 0.022,
+            "median": 0.02,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "effective_start_date",
+          "logical_name": "effective_start_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Start date when this cost term becomes effective.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "start date not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "effective_end_date",
+          "logical_name": "effective_end_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "End date (inclusive) for the applicability of this cost term; null means it continues through the holding period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no end date / continues",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Costs",
+        "block_id": "assumptions.cost_terms",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "C80:I105"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "PeriodCalendar",
+      "logical_name": "period_calendar",
+      "n_rows": 81,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "period_id",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each modeled monthly period in the calendar.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              1000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no period id",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 81,
+            "mean": 41.0,
+            "median": 41.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "period_start",
+          "logical_name": "period_start",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Start date of the modeled period (inclusive).",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period start missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "period_end",
+          "logical_name": "period_end",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "End date of the modeled period (inclusive / end-of-month).",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period end missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year",
+          "logical_name": "year",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Calendar year associated with the period start date.",
+            "unit": "year",
+            "value_type": "integer",
+            "expected_range": [
+              1900,
+              2100
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "year missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2017,
+            "max": 2024,
+            "mean": 2020.851851851852,
+            "median": 2021.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "month",
+          "logical_name": "month",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Calendar month (1-12) associated with the period start date.",
+            "unit": "month",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "month missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 12,
+            "mean": 6.185185185185185,
+            "median": 6.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Period Start",
+        "block_id": "assumptions.period_calendar",
+        "extraction_kind": "repeated_period_columns_to_dimension_table",
+        "cell_region": "E6:CO7"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T2",
+      "child_table_id": "T3",
+      "parent_key": [
+        "property_variant_id"
+      ],
+      "child_key": [
+        "property_variant_id"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T2",
+      "child_table_id": "T4",
+      "parent_key": [
+        "property_variant_id"
+      ],
+      "child_key": [
+        "property_variant_id"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Inputs for a property investment valuation case, including per-property purchase prices, holding periods, terminal values, rental revenue terms, operating cost terms (fixed schedules or percentages of revenue), an optional overhaul scenario for one property, and a generated monthly period calendar used for cashflow modeling and discounting.",
+    "n_tables": 5,
+    "notes": "Property variant 4a (no overhaul) and 4b (with overhaul) are mutually exclusive options for the same underlying property. Indexation uses a base date of 2018-01-01 and steps annually; discounting uses a valuation base date of 2017-12-31 with discount rates stored as decimal fractions."
+  }
+}

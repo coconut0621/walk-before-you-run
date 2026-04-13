@@ -1,0 +1,454 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Persons",
+      "logical_name": "persons",
+      "n_rows": 4,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "PersonID",
+          "logical_name": "person_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived surrogate key for each named person appearing as a column in the Assumptions block.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              4
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no person record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 4,
+            "mean": 2.5,
+            "median": 2.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PersonName",
+          "logical_name": "person_name",
+          "dtype": "string",
+          "role": "id",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name shown in the column headers of the Assumptions matrix.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "person name not present in source header",
+            "allowed_categories": [
+              "Alice",
+              "Bob",
+              "Charlie",
+              "Diana"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Assumptions",
+        "block_id": "inputs.assumptions.person_headers",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "E13:H13"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "AssumptionTypes",
+      "logical_name": "assumption_types",
+      "n_rows": 7,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "AssumptionTypeID",
+          "logical_name": "assumption_type_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived surrogate key for each assumption row label in the Assumptions block.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              7
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no assumption type record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 7,
+            "mean": 4.0,
+            "median": 4.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "AssumptionLabel",
+          "logical_name": "assumption_label",
+          "dtype": "string",
+          "role": "id",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Exact assumption label from the leftmost row header in the General inputs matrix.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption label missing",
+            "allowed_categories": [
+              "Initial Account Deposit at 31 Dec 2016 ($)",
+              "Annual Salary in 2017 ($)",
+              "Growth in annual salary each 1 January (beginning in 2018 unless noted)",
+              "Core Deposits into Savings Account (beginning in 2017)",
+              "Additional Deposits into Savings Account",
+              "Date the Account is Withdrawn and Closed",
+              "Forecasted Investment Returns"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Assumptions",
+        "block_id": "inputs.assumptions.row_labels",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "D14:D20"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "PersonAssumptions",
+      "logical_name": "person_assumptions",
+      "n_rows": 28,
+      "profile": {
+        "density": 0.7755102040816326
+      },
+      "columns": [
+        {
+          "physical_name": "AssumptionValueID",
+          "logical_name": "assumption_value_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived surrogate key for each person-by-assumption cell from the wide matrix.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              28
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no fact row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 28,
+            "mean": 14.5,
+            "median": 14.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PersonID",
+          "logical_name": "person_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to the person whose assumption value is recorded.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              4
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "person not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 4,
+            "mean": 2.5,
+            "median": 2.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "AssumptionTypeID",
+          "logical_name": "assumption_type_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to the assumption type represented by the source row label.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              7
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption type not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 7,
+            "mean": 4.0,
+            "median": 4.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "ValueKind",
+          "logical_name": "value_kind",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived storage class of the source cell after inspection of the workbook value.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "value kind not derived",
+            "allowed_categories": [
+              "numeric",
+              "date",
+              "text"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "RawValue",
+          "logical_name": "raw_value",
+          "dtype": "string",
+          "role": "free_text",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Exact source cell content rendered as text for the person-by-assumption intersection.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption value not captured from source cell",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "NumericValue",
+          "logical_name": "numeric_value",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Parsed numeric literal when the source assumption cell contains a direct dollar amount or salary value.",
+            "unit": "$",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              95000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "source value is not a direct numeric literal",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 95000,
+            "mean": 37502.25,
+            "median": 37849.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "DateValue",
+          "logical_name": "date_value",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Parsed date when the source assumption cell is an explicit workbook date.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "source value is not a date literal",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Assumptions",
+        "block_id": "inputs.assumptions.matrix",
+        "extraction_kind": "wide_entity_attribute_matrix_to_long_fact_table",
+        "cell_region": "D13:H20"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T3",
+      "parent_key": [
+        "PersonID"
+      ],
+      "child_key": [
+        "PersonID"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T2",
+      "child_table_id": "T3",
+      "parent_key": [
+        "AssumptionTypeID"
+      ],
+      "child_key": [
+        "AssumptionTypeID"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Scenario input dataset for a savings-account model, containing four named persons and seven assumption categories normalized from a wide Excel assumptions matrix.",
+    "n_tables": 3,
+    "notes": "The Inputs sheet block D13:H20 was normalized into a person dimension, an assumption-type dimension, and a long fact table of person-by-assumption values. The Formats sheet is a styling legend and was not modeled as a data table."
+  }
+}

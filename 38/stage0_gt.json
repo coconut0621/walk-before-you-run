@@ -1,0 +1,339 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Operational Assumptions",
+      "logical_name": "operational_assumptions",
+      "n_rows": 13,
+      "profile": {
+        "density": 0.75
+      },
+      "columns": [
+        {
+          "physical_name": "Assumption",
+          "logical_name": "assumption_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name/label of an operational parameter used in the PV forecast model.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no parameter label",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Section",
+          "logical_name": "assumption_group",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "High-level grouping of operational parameters (e.g., costs, capacity, performance, revenues).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "group not recorded",
+            "allowed_categories": [
+              "Capacity",
+              "Costs",
+              "Performance",
+              "Revenues"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Unit",
+          "logical_name": "unit_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit label shown for the parameter.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit not provided",
+            "allowed_categories": [
+              "[% p.a.]",
+              "[AU$]",
+              "[AU$/kWh]",
+              "[US$]",
+              "[kW/system]",
+              "[kWh/day/system]",
+              "[kWh/kW/day]"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "assumption_value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Numeric value for the operational parameter (blank in the provided workbook).",
+            "unit": "(varies)",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "value not yet populated in workbook",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": null,
+            "type_consistency": null,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Operational Assumptions",
+        "block_id": "assumptions.operational_assumptions",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "B10:C32"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Installation Assumptions and Exchange Rate Assumptions",
+      "logical_name": "installation_schedule_exchange_rates",
+      "n_rows": 24,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Month",
+          "logical_name": "month",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "First day of the month for which installation counts and exchange rates apply.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "month missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Number of Small systems installed",
+          "logical_name": "n_small_systems_installed",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of small PV systems installed in the given month.",
+            "unit": "systems",
+            "value_type": "integer",
+            "expected_range": [
+              37,
+              94
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "installation count missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 37,
+            "max": 94,
+            "mean": 68.25,
+            "median": 71.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Number of Large systems installed",
+          "logical_name": "n_large_systems_installed",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of large PV systems installed in the given month.",
+            "unit": "systems",
+            "value_type": "integer",
+            "expected_range": [
+              33,
+              67
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "installation count missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 33,
+            "max": 67,
+            "mean": 52.75,
+            "median": 55.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "1.00 AUD:USD. 1 AUD is equal to:",
+          "logical_name": "aud_to_usd_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Monthly exchange rate expressed as USD per 1 AUD.",
+            "unit": "USD per AUD",
+            "value_type": "continuous",
+            "expected_range": [
+              0.817,
+              1.055
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "exchange rate missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.817,
+            "max": 1.055,
+            "mean": 0.931125,
+            "median": 0.904,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "1.00 USD: AUD. 1 USD is equal to:",
+          "logical_name": "usd_to_aud_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Monthly exchange rate expressed as AUD per 1 USD (reciprocal of AUD→USD rate).",
+            "unit": "AUD per USD",
+            "value_type": "continuous",
+            "expected_range": [
+              0.947867,
+              1.22399
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "exchange rate missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.947867,
+            "max": 1.22399,
+            "mean": 1.081721,
+            "median": 1.1062,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Installation Assumptions and Exchange Rate Assumptions",
+        "block_id": "assumptions.installation_exchange_rate_schedule",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "C36:G60"
+      }
+    }
+  ],
+  "relations": [],
+  "dataset_summary": {
+    "plain_description": "A single-sheet Excel workbook containing a vertical operational-parameter block for a rooftop solar PV forecast model and a monthly installation/exchange-rate schedule covering July 2013 through June 2015.",
+    "n_tables": 2,
+    "notes": "Operational assumptions are organized into section-labeled parameter rows with unit labels, while the Value field is blank throughout the provided workbook. The monthly schedule contains installation counts for small and large systems together with AUD↔USD exchange rates."
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Periods",
+      "logical_name": "periods",
+      "n_rows": 84,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Period Start",
+          "logical_name": "period_start_date",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "First day of the monthly period used across the financial model.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Period Start",
+        "block_id": "assumptions.period_header",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "J6:CR6"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Tax Loss Expiry Inputs",
+      "logical_name": "tax_parameters",
+      "n_rows": 1,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Parameter Name",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Description of the tax parameter.",
+            "unit": null,
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Parameter Value",
+          "logical_name": "parameter_value",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric value for the tax parameter (e.g., number of years).",
+            "unit": "years",
+            "value_type": "integer",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2,
+            "max": 2,
+            "mean": 2.0,
+            "median": 2.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Tax Loss Expiry Inputs",
+        "block_id": "assumptions.tax_loss_expiry",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "C4:E8"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "Workings Facts",
+      "logical_name": "workings_facts",
+      "n_rows": 840,
+      "profile": {
+        "density": 0.95
+      },
+      "columns": [
+        {
+          "physical_name": "Line Item",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Financial working or calculation line item.",
+            "unit": null,
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unknown line item",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Period Start",
+          "logical_name": "period_start_date",
+          "dtype": "date",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Period for the financial measure.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "measure_value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Calculated value for the line item and period.",
+            "unit": "currency",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no calculation for period",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 0.95,
+            "type_consistency": 0.95,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Workings",
+        "anchor_text": "Workings",
+        "block_id": "workings.time_series_matrix",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "A6:CR100"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "Formatting Legend",
+      "logical_name": "format_styles",
+      "n_rows": 15,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Format Category",
+          "logical_name": "format_category",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Description of the cell format meaning in the workbook.",
+            "unit": null,
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Example Value",
+          "logical_name": "example_value",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Example content illustrating the format style.",
+            "unit": null,
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Formats",
+        "anchor_text": "Formatting Legend",
+        "block_id": "formats.legend_list",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "D11:J40"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T3",
+      "parent_key": [
+        "Period Start"
+      ],
+      "child_key": [
+        "Period Start"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "dataset_name": "MO15 Tax Data Financial Model",
+    "n_tables": 4,
+    "logical_description": "A tax financial model from ModelOff 2015 consisting of a global timeline period dimension, a set of tax assumptions, a large fact table representing the core financial workings unpivoted by period, and a metadata table capturing spreadsheet format styling conventions.",
+    "notes": [
+      "The horizontal period arrays in Assumptions and Workings were extracted and normalized into a single period dimension table (T1).",
+      "The Workings matrix was unpivoted from its wide 'one column per period' format into a normalized long fact table (T3).",
+      "Tax assumption parameters were extracted as a vertical key-value pair table (T2)."
+    ]
+  }
+}

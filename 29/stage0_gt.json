@@ -1,0 +1,1684 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "widget_definitions",
+      "logical_name": "widget_definitions",
+      "n_rows": 8,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "widget_name",
+          "logical_name": "widget_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Widget product name used in the model's sales and pricing assumptions.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no widget name",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "price_category",
+          "logical_name": "price_category",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Assigned pricing category for each widget.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no category",
+            "allowed_categories": [
+              "Low value",
+              "Mid value",
+              "High value"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Widget categories",
+        "block_id": "inputs.widget_definitions",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "C47:D55"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "sales_volumes",
+      "logical_name": "annual_sales_volumes",
+      "n_rows": 120,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "widget_name",
+          "logical_name": "widget_name",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Widget product whose annual unit sales forecast is recorded.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no widget",
+            "allowed_categories": [
+              "Widget A",
+              "Widget B",
+              "Widget C",
+              "Widget D",
+              "Widget E",
+              "Widget F",
+              "Widget G",
+              "Widget H"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year index, where 1 is the first forecast year and 15 is the last.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1.0,
+            "max": 15.0,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "sales_volume_m_units",
+          "logical_name": "sales_volume_million_units",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast sales volume in millions of units for the widget in the given year.",
+            "unit": "units ms",
+            "value_type": "continuous",
+            "expected_range": [
+              25,
+              229.8948426475245
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no sales volume",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 25.0,
+            "max": 229.8948426475245,
+            "mean": 77.801662,
+            "median": 58.73685533094056,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Revenue Volume Assumptions",
+        "block_id": "inputs.sales_volumes",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C37:T44"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "pricing_base",
+      "logical_name": "annual_unit_pricing_base_scenario",
+      "n_rows": 45,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "price_category",
+          "logical_name": "price_category",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Pricing category for which the base-scenario unit price applies.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no category",
+            "allowed_categories": [
+              "Low value",
+              "Mid value",
+              "High value"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year index, where 1 is the first forecast year and 15 is the last.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1.0,
+            "max": 15.0,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "unit_price_usd",
+          "logical_name": "unit_price_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Nominal unit price in USD per unit for the base pricing scenario.",
+            "unit": "$ / unit",
+            "value_type": "continuous",
+            "expected_range": [
+              60,
+              231.3154462819241
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no price",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 60.0,
+            "max": 231.3154462819241,
+            "mean": 134.628993,
+            "median": 137.9257922639168,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Revenue Pricing Assumptions",
+        "block_id": "inputs.pricing_base",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C60:T62"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "pricing_growth",
+      "logical_name": "annual_unit_pricing_growth_scenario",
+      "n_rows": 45,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "price_category",
+          "logical_name": "price_category",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Pricing category for which the growth-scenario unit price applies.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no category",
+            "allowed_categories": [
+              "Low value",
+              "Mid value",
+              "High value"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year index, where 1 is the first forecast year and 15 is the last.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1.0,
+            "max": 15.0,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "unit_price_usd",
+          "logical_name": "unit_price_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Nominal unit price in USD per unit for the growth pricing scenario.",
+            "unit": "$ / unit",
+            "value_type": "continuous",
+            "expected_range": [
+              90,
+              277.578535538309
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no price",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 90.0,
+            "max": 277.578535538309,
+            "mean": 172.493397,
+            "median": 175.5419174268032,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Pricing (nominal) - Growth Scenario",
+        "block_id": "inputs.pricing_growth",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C64:T67"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "model_settings",
+      "logical_name": "model_settings",
+      "n_rows": 2,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "setting_name",
+          "logical_name": "setting_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of a non-numeric workbook setting used to configure the model.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no setting name",
+            "allowed_categories": [
+              "first_forecast_year_end_date",
+              "pricing_scenario_used"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "setting_value",
+          "logical_name": "setting_value",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Stored setting value as displayed by the workbook.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no setting value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "First year of forecast period",
+        "block_id": "inputs.model_settings",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "C21:E57"
+      }
+    },
+    {
+      "table_id": "T6",
+      "physical_name": "scalar_assumptions",
+      "logical_name": "scalar_numeric_assumptions",
+      "n_rows": 5,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "assumption_name",
+          "logical_name": "assumption_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of a scalar numeric model assumption that does not vary by year.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no assumption name",
+            "allowed_categories": [
+              "company_tax_rate",
+              "direct_sales_cost_per_unit",
+              "other_costs_per_year_usd_m",
+              "depreciation_years_accounting",
+              "tax_depreciation_rate"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric value of the scalar assumption.",
+            "unit": "",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.2,
+            "max": 750.0,
+            "mean": 154.3,
+            "median": 7.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit or interpretation of the scalar assumption value.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no unit",
+            "allowed_categories": [
+              "%",
+              "$ per unit",
+              "$m",
+              "years",
+              "% pa"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Taxation",
+        "block_id": "inputs.scalar_assumptions",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "C32:E91"
+      }
+    },
+    {
+      "table_id": "T7",
+      "physical_name": "time_series_assumptions",
+      "logical_name": "annual_assumption_series",
+      "n_rows": 240,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "assumption_group",
+          "logical_name": "assumption_group",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "High-level input block from which the assumption series was extracted.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no group",
+            "allowed_categories": [
+              "economic_assumptions",
+              "cost_of_sales",
+              "overheads",
+              "working_capital",
+              "capital_expenditure",
+              "financing_interest_rates",
+              "financing_policy"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "assumption_name",
+          "logical_name": "assumption_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Canonical name of the yearly assumption series.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no assumption name",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year index, where 1 is the first forecast year and 15 is the last.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1.0,
+            "max": 15.0,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Year-specific value of the assumption series.",
+            "unit": "",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.0,
+            "max": 12112.024517055,
+            "mean": 187.260239,
+            "median": 0.6,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit of the yearly assumption value.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no unit",
+            "allowed_categories": [
+              "% pa",
+              "%",
+              "% of sales",
+              "days",
+              "$m"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Economic Assumptions",
+        "block_id": "inputs.time_series_assumptions",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C28:T109"
+      }
+    },
+    {
+      "table_id": "T8",
+      "physical_name": "financing_schedule",
+      "logical_name": "annual_financing_flows",
+      "n_rows": 105,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "financing_item",
+          "logical_name": "financing_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Named financing flow series, such as loan drawdowns, repayments, or equity contribution.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no financing item",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year index, where 1 is the first forecast year and 15 is the last.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1.0,
+            "max": 15.0,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "amount_usd_m",
+          "logical_name": "amount_usd_m",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Scheduled financing cash flow amount in USD millions; repayments are negative.",
+            "unit": "$m",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no financing amount",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -600.0,
+            "max": 6000.0,
+            "mean": 85.714286,
+            "median": 0.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Financing",
+        "block_id": "inputs.financing_schedule",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C102:T108"
+      }
+    },
+    {
+      "table_id": "T9",
+      "physical_name": "calculations_fact",
+      "logical_name": "calculation_schedule_values",
+      "n_rows": 1965,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "calc_block",
+          "logical_name": "calc_block",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Named schedule block inside the Calculations worksheet.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no calculation block",
+            "allowed_categories": [
+              "volumes",
+              "revenues",
+              "cost_of_sales",
+              "total_sales",
+              "expense_schedule",
+              "working_capital",
+              "depreciation",
+              "debt_schedule",
+              "cash_waterfall",
+              "interest",
+              "tax"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "row_index",
+          "logical_name": "row_index",
+          "dtype": "integer",
+          "role": "id",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Original worksheet row number for the calculation line item.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              8,
+              239
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no source row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 8.0,
+            "max": 239.0,
+            "mean": 123.5,
+            "median": 123.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "line_item",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "free_text",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Displayed line-item label or resolved referenced label for the calculation row.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item label",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year index, where 1 is the first forecast year and 15 is the last.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1.0,
+            "max": 15.0,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Calculated numeric value for the line item in the given year.",
+            "unit": "",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no calculated value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Displayed unit, if present, for the calculation line item.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no unit shown",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Calculations",
+        "anchor_text": "Calculations",
+        "block_id": "calculations.model_schedules",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C8:T239"
+      }
+    },
+    {
+      "table_id": "T10",
+      "physical_name": "profit_loss_fact",
+      "logical_name": "profit_loss_statement_values",
+      "n_rows": 195,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "row_index",
+          "logical_name": "row_index",
+          "dtype": "integer",
+          "role": "id",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Original worksheet row number for the profit and loss line item.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              6,
+              23
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no source row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 6.0,
+            "max": 23.0,
+            "mean": 14.538462,
+            "median": 14.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "line_item",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "free_text",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Profit and loss statement line-item label.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item label",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year index, where 1 is the first forecast year and 15 is the last.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1.0,
+            "max": 15.0,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Output statement value for the line item in the given year.",
+            "unit": "",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no statement value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Outputs",
+        "anchor_text": "Profit and Loss",
+        "block_id": "outputs.profit_loss",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B6:T23"
+      }
+    },
+    {
+      "table_id": "T11",
+      "physical_name": "balance_sheet_fact",
+      "logical_name": "balance_sheet_values",
+      "n_rows": 240,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "row_index",
+          "logical_name": "row_index",
+          "dtype": "integer",
+          "role": "id",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Original worksheet row number for the balance sheet line item.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              28,
+              52
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no source row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 28.0,
+            "max": 52.0,
+            "mean": 39.375,
+            "median": 39.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "line_item",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "free_text",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Balance sheet line-item label.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item label",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year index, where 1 is the first forecast year and 15 is the last.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1.0,
+            "max": 15.0,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Balance sheet value for the line item in the given year.",
+            "unit": "",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no statement value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Outputs",
+        "anchor_text": "Balance Sheet",
+        "block_id": "outputs.balance_sheet",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B28:T52"
+      }
+    },
+    {
+      "table_id": "T12",
+      "physical_name": "equity_rollforward_fact",
+      "logical_name": "equity_rollforward_values",
+      "n_rows": 120,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "row_index",
+          "logical_name": "row_index",
+          "dtype": "integer",
+          "role": "id",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Original worksheet row number for the equity rollforward line item.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              57,
+              67
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no source row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 57.0,
+            "max": 67.0,
+            "mean": 61.875,
+            "median": 62.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "line_item",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "free_text",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Equity rollforward line-item label.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item label",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year index, where 1 is the first forecast year and 15 is the last.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1.0,
+            "max": 15.0,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Equity rollforward value for the line item in the given year.",
+            "unit": "",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no statement value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Outputs",
+        "anchor_text": "Shareholders Equity",
+        "block_id": "outputs.equity_rollforward",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B57:T67"
+      }
+    },
+    {
+      "table_id": "T13",
+      "physical_name": "cash_flow_fact",
+      "logical_name": "cash_flow_statement_values",
+      "n_rows": 210,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "row_index",
+          "logical_name": "row_index",
+          "dtype": "integer",
+          "role": "id",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Original worksheet row number for the cash flow statement line item.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              73,
+              91
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no source row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 73.0,
+            "max": 91.0,
+            "mean": 81.857143,
+            "median": 82.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "line_item",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "free_text",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Cash flow statement line-item label.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item label",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "year_number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast year index, where 1 is the first forecast year and 15 is the last.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1.0,
+            "max": 15.0,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Cash flow statement value for the line item in the given year.",
+            "unit": "",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no statement value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Outputs",
+        "anchor_text": "Cash Flow Statement",
+        "block_id": "outputs.cash_flow",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B73:T91"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": [
+        "widget_name"
+      ],
+      "child_key": [
+        "widget_name"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Multi-sheet financial-model workbook for a widget company. The workbook contains input assumptions, formula-driven calculation schedules, and output financial statements represented as normalized logical tables.",
+    "n_tables": 13,
+    "notes": "Inputs are normalized into widget definitions, annual sales volumes, pricing schedules, scalar settings, yearly assumption series, and financing flows. The Calculations sheet is represented as a long fact table keyed by source row and year. The Outputs sheet is represented as separate long fact tables for profit and loss, balance sheet, equity rollforward, and cash flow statement values. Sheets are linked primarily through spreadsheet formulas rather than explicit relational joins."
+  }
+}

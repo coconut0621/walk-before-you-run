@@ -1,0 +1,469 @@
+{
+  "dataset_summary": {
+    "dataset_name": "MO16_Round_1_Sec_2_Chip_Off_The_Old_Block",
+    "n_tables": 6,
+    "n_relations": 0
+  },
+  "tables": [
+    {
+      "table_id": "t1_periods",
+      "physical_name": "periods",
+      "logical_name": "Periods",
+      "description": "Quarterly time periods extracted from the wide calculation headers.",
+      "row_count": 40,
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Period Start",
+        "block_id": "block_periods_header",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "H6:AW7"
+      },
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "column_id": "t1_c1",
+          "physical_name": "period_start",
+          "logical_name": "Period Start Date",
+          "description": "The start date of the quarter.",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "timestamp"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD"
+          }
+        },
+        {
+          "column_id": "t1_c2",
+          "physical_name": "period_end",
+          "logical_name": "Period End Date",
+          "description": "The end date of the quarter.",
+          "dtype": "date",
+          "role": "other",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "timestamp"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD"
+          }
+        }
+      ]
+    },
+    {
+      "table_id": "t2_shutdown_periods",
+      "physical_name": "shutdown_periods",
+      "logical_name": "Shutdown Periods",
+      "description": "List of planned plant shutdown periods with start and end dates.",
+      "row_count": 6,
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Shudown period",
+        "block_id": "block_shutdowns",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "C12:E19"
+      },
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "column_id": "t2_c1",
+          "physical_name": "shutdown_name",
+          "logical_name": "Shutdown Name",
+          "description": "Identifier for the shutdown period.",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "categorical"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0
+          }
+        },
+        {
+          "column_id": "t2_c2",
+          "physical_name": "start_date",
+          "logical_name": "Start Date",
+          "description": "Start date of the shutdown.",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "timestamp"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD"
+          }
+        },
+        {
+          "column_id": "t2_c3",
+          "physical_name": "end_date",
+          "logical_name": "End Date",
+          "description": "End date of the shutdown.",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "timestamp"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD"
+          }
+        }
+      ]
+    },
+    {
+      "table_id": "t3_inflation_rates",
+      "physical_name": "inflation_rates",
+      "logical_name": "Inflation Rates",
+      "description": "Annual inflation rate assumptions for different cost and price categories.",
+      "row_count": 4,
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Inflation rates",
+        "block_id": "block_inflation",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "C25:E28"
+      },
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "column_id": "t3_c1",
+          "physical_name": "item",
+          "logical_name": "Item",
+          "description": "The category to which the inflation rate applies.",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "categorical"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0
+          }
+        },
+        {
+          "column_id": "t3_c2",
+          "physical_name": "rate_per_annum",
+          "logical_name": "Rate per Annum",
+          "description": "Annual inflation rate (expressed as a decimal).",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "continuous"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.01,
+            "max": 0.02,
+            "mean": 0.01625,
+            "median": 0.0175,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table_id": "t4_market_prices",
+      "physical_name": "market_prices",
+      "logical_name": "Market Prices",
+      "description": "Assumed market electricity prices per MWh over consecutive annual periods.",
+      "row_count": 11,
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Market price",
+        "block_id": "block_market_prices",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "C33:E44"
+      },
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "column_id": "t4_c1",
+          "physical_name": "year_label",
+          "logical_name": "Year Label",
+          "description": "Sequential year identifier (e.g., Year 1).",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "categorical"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0
+          }
+        },
+        {
+          "column_id": "t4_c2",
+          "physical_name": "start_date",
+          "logical_name": "Start Date",
+          "description": "Start date for the pricing period.",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "timestamp"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD"
+          }
+        },
+        {
+          "column_id": "t4_c3",
+          "physical_name": "end_date",
+          "logical_name": "End Date",
+          "description": "End date for the pricing period.",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "timestamp"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD"
+          }
+        },
+        {
+          "column_id": "t4_c4",
+          "physical_name": "price_per_mwh",
+          "logical_name": "Price per MWh",
+          "description": "The market price for electricity in $ per MWh.",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "continuous"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 20.0,
+            "max": 81.0,
+            "mean": 57.7272,
+            "median": 63.0,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table_id": "t5_suppliers",
+      "physical_name": "suppliers",
+      "logical_name": "Suppliers",
+      "description": "Wood chip supplier constraints and costs.",
+      "row_count": 2,
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Costs",
+        "block_id": "block_suppliers",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "C52:E59"
+      },
+      "profile": {
+        "density": 0.875
+      },
+      "columns": [
+        {
+          "column_id": "t5_c1",
+          "physical_name": "supplier_name",
+          "logical_name": "Supplier Name",
+          "description": "Name or identifier of the wood chip supplier.",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "categorical"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0
+          }
+        },
+        {
+          "column_id": "t5_c2",
+          "physical_name": "price_per_tonne",
+          "logical_name": "Price per Tonne",
+          "description": "Cost in $ per tonne of wood chips.",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "continuous"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 100.0,
+            "max": 130.0,
+            "mean": 115.0,
+            "median": 115.0,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "column_id": "t5_c3",
+          "physical_name": "mwh_produced_per_tonne",
+          "logical_name": "MWh Produced per Tonne",
+          "description": "Energy yield in MWh per tonne of wood chips from this supplier.",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "continuous"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 3.5,
+            "max": 4.0,
+            "mean": 3.75,
+            "median": 3.75,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "column_id": "t5_c4",
+          "physical_name": "max_amount_per_quarter",
+          "logical_name": "Maximum Amount per Quarter",
+          "description": "Maximum tonnes available per quarter (if any).",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_nullable": true,
+          "dictionary": {
+            "value_type": "continuous"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 4500.0,
+            "max": 4500.0,
+            "mean": 4500.0,
+            "median": 4500.0,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table_id": "t6_model_parameters",
+      "physical_name": "model_parameters",
+      "logical_name": "Model Parameters",
+      "description": "Single-value global assumptions used in the financial model.",
+      "row_count": 11,
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Production information",
+        "block_id": "block_global_parameters",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "C9:E72"
+      },
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "column_id": "t6_c1",
+          "physical_name": "parameter_name",
+          "logical_name": "Parameter Name",
+          "description": "The name of the assumption or parameter.",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "categorical"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0
+          }
+        },
+        {
+          "column_id": "t6_c2",
+          "physical_name": "unit",
+          "logical_name": "Unit",
+          "description": "The unit of measurement for the parameter.",
+          "dtype": "string",
+          "role": "other",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "categorical"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0
+          }
+        },
+        {
+          "column_id": "t6_c3",
+          "physical_name": "value",
+          "logical_name": "Value",
+          "description": "The value of the parameter (stored as text to accommodate mixed types).",
+          "dtype": "string",
+          "role": "other",
+          "is_nullable": false,
+          "dictionary": {
+            "value_type": "text"
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0
+          }
+        }
+      ]
+    }
+  ],
+  "relations": []
+}

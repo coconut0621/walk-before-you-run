@@ -1,0 +1,1165 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "period_calendar",
+      "logical_name": "period_calendar",
+      "n_rows": 40,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "period_id",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each quarterly model period derived from the period header block.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              40
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no period record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 40,
+            "mean": 20.5,
+            "median": 20.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "period_start",
+          "logical_name": "period_start",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Start date of the quarterly model period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period start date not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "period_end",
+          "logical_name": "period_end",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "End date of the quarterly model period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period end date not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Period Start",
+        "block_id": "assumptions.period_calendar",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "M6:AZ7"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "production_parameters",
+      "logical_name": "production_parameters",
+      "n_rows": 1,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "plant_capacity",
+          "logical_name": "plant_capacity_mw",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Assumed plant capacity.",
+            "unit": "MW",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              null
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "plant capacity not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 9,
+            "max": 9,
+            "mean": 9.0,
+            "median": 9.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "availability",
+          "logical_name": "availability",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Assumed plant availability.",
+            "unit": "%",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "availability not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.95,
+            "max": 0.95,
+            "mean": 0.95,
+            "median": 0.95,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "hours_in_a_day",
+          "logical_name": "hours_in_a_day",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Assumed number of hours in a day used by the model.",
+            "unit": "#",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              24
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "hours per day not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 24,
+            "max": 24,
+            "mean": 24.0,
+            "median": 24.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Production information",
+        "block_id": "assumptions.production_information",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "D13:I17"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "shutdown_periods",
+      "logical_name": "shutdown_periods",
+      "n_rows": 6,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "shutdown_period_id",
+          "logical_name": "shutdown_period_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each planned shutdown period.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              6
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no shutdown period record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 6,
+            "mean": 3.5,
+            "median": 3.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "shutdown_period",
+          "logical_name": "shutdown_period_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Workbook label for the shutdown period.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "shutdown label not provided",
+            "allowed_categories": [
+              "Shutdown period 1",
+              "Shutdown period 2",
+              "Shutdown period 3",
+              "Shutdown period 4",
+              "Shutdown period 5",
+              "Shutdown period 6"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "date_start",
+          "logical_name": "shutdown_start_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Start date of the shutdown period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "shutdown start date not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "date_end",
+          "logical_name": "shutdown_end_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "End date of the shutdown period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "shutdown end date not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Shudown period",
+        "block_id": "assumptions.shutdown_periods",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "D22:I27"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "inflation_rates",
+      "logical_name": "inflation_rates",
+      "n_rows": 4,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "inflation_item",
+          "logical_name": "inflation_item",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Cost or price item with an associated annual inflation rate.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "inflation item not provided",
+            "allowed_categories": [
+              "Cap price",
+              "Floor price",
+              "Wood chip Supplier 1",
+              "Fixed costs"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "inflation_base_date",
+          "logical_name": "inflation_base_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Base date from which the inflation rates apply.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "inflation base date not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "annual_inflation_rate",
+          "logical_name": "annual_inflation_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Annual inflation rate applied to the named item.",
+            "unit": "% per annum",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "inflation rate not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.01,
+            "max": 0.02,
+            "mean": 0.01625,
+            "median": 0.0175,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Inflation rates",
+        "block_id": "assumptions.inflation_rates",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "D31:I37"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "market_price_schedule",
+      "logical_name": "market_price_schedule",
+      "n_rows": 11,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "market_price_year_id",
+          "logical_name": "market_price_year_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each annual market price period.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              11
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no market price period record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 11,
+            "mean": 6.0,
+            "median": 6.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "market_price_year",
+          "logical_name": "market_price_year_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Workbook year label for the market price period.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "market price year label not provided",
+            "allowed_categories": [
+              "Year 1",
+              "Year 2",
+              "Year 3",
+              "Year 4",
+              "Year 5",
+              "Year 6",
+              "Year 7",
+              "Year 8",
+              "Year 9",
+              "Year 10",
+              "Year 11"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "date_start",
+          "logical_name": "market_price_start_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Start date for the annual market price period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "market price start date not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "date_end",
+          "logical_name": "market_price_end_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "End date for the annual market price period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "market price end date not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "price",
+          "logical_name": "market_price_per_mwh",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Assumed market price for electricity during the annual period.",
+            "unit": "$ per MWh",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              null
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "market price not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 20,
+            "max": 81,
+            "mean": 57.72727272727273,
+            "median": 63.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Market price",
+        "block_id": "assumptions.market_price_schedule",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "D41:I54"
+      }
+    },
+    {
+      "table_id": "T6",
+      "physical_name": "revenue_price_bounds",
+      "logical_name": "revenue_price_bounds",
+      "n_rows": 1,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "cap_price",
+          "logical_name": "cap_price_per_mwh",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Cap price applied to market-based revenue valuation.",
+            "unit": "$ per MWh",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              null
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "cap price not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 70,
+            "max": 70,
+            "mean": 70.0,
+            "median": 70.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "floor_price",
+          "logical_name": "floor_price_per_mwh",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Floor price applied to market-based revenue valuation.",
+            "unit": "$ per MWh",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              null
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "floor price not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 45,
+            "max": 45,
+            "mean": 45.0,
+            "median": 45.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Revenues",
+        "block_id": "assumptions.revenue_price_bounds",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "D56:I58"
+      }
+    },
+    {
+      "table_id": "T7",
+      "physical_name": "supplier_terms",
+      "logical_name": "supplier_terms",
+      "n_rows": 2,
+      "profile": {
+        "density": 0.9
+      },
+      "columns": [
+        {
+          "physical_name": "supplier_id",
+          "logical_name": "supplier_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each wood chip supplier.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              2
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no supplier record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 2,
+            "mean": 1.5,
+            "median": 1.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "supplier",
+          "logical_name": "supplier_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Supplier label from the cost assumptions block.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "supplier name not provided",
+            "allowed_categories": [
+              "Supplier 1",
+              "Supplier 2"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "price_per_tonne",
+          "logical_name": "price_per_tonne",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Supplier price per tonne of wood chip.",
+            "unit": "$ per tonne",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              null
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "supplier price not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 100,
+            "max": 130,
+            "mean": 115.0,
+            "median": 115.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "mwh_produced_per_tonne",
+          "logical_name": "mwh_produced_per_tonne",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Energy produced per tonne of supplied wood chip.",
+            "unit": "MWh per tonne",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              null
+            ],
+            "higher_is_better": true,
+            "missing_value_meaning": "conversion factor not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 3.5,
+            "max": 4,
+            "mean": 3.75,
+            "median": 3.75,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "maximum_amount_available_per_quarter",
+          "logical_name": "maximum_amount_available_per_quarter_tonnes",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Maximum tonnes available from the supplier in a quarter when specified.",
+            "unit": "tonnes",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              null
+            ],
+            "higher_is_better": true,
+            "missing_value_meaning": "no supplier-specific quarterly cap stated",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 4500,
+            "max": 4500,
+            "mean": 4500.0,
+            "median": 4500.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Supplier 1",
+        "block_id": "assumptions.supplier_terms",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "C62:I69"
+      }
+    },
+    {
+      "table_id": "T8",
+      "physical_name": "operating_cost_parameters",
+      "logical_name": "operating_cost_parameters",
+      "n_rows": 1,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "fixed_costs",
+          "logical_name": "fixed_costs_per_month",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Fixed operating costs per month.",
+            "unit": "$ per month",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              null
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "fixed costs not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 75000,
+            "max": 75000,
+            "mean": 75000.0,
+            "median": 75000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Fixed costs",
+        "block_id": "assumptions.fixed_costs",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "D71:I71"
+      }
+    },
+    {
+      "table_id": "T9",
+      "physical_name": "valuation_parameters",
+      "logical_name": "valuation_parameters",
+      "n_rows": 1,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "stake_to_be_considered",
+          "logical_name": "stake_to_be_considered",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Ownership stake included in the valuation.",
+            "unit": "%",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "stake not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.2,
+            "max": 0.2,
+            "mean": 0.2,
+            "median": 0.2,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "required_return_market_price_subject_to_floor_and_cap",
+          "logical_name": "required_return_market_price_subject_to_floor_and_cap",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Required return for the valuation case where market price is subject to the floor and cap.",
+            "unit": "%",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "required return not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.1,
+            "max": 0.1,
+            "mean": 0.1,
+            "median": 0.1,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "required_return_floor_price_only",
+          "logical_name": "required_return_floor_price_only",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Required return for the valuation case using only the floor price.",
+            "unit": "%",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "required return not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.04,
+            "max": 0.04,
+            "mean": 0.04,
+            "median": 0.04,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "valuation_base_date",
+          "logical_name": "valuation_base_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Base date for the valuation.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "valuation base date not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Valuation",
+        "block_id": "assumptions.valuation_parameters",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "D75:I81"
+      }
+    }
+  ],
+  "relations": [],
+  "dataset_summary": {
+    "plain_description": "Assumption dataset for a biomass plant valuation model, including a quarterly period calendar, production and shutdown assumptions, inflation schedules, revenue inputs, supplier terms, operating costs, and valuation parameters.",
+    "n_tables": 9,
+    "notes": "All emitted tables are derived from the Assumptions sheet. The Calculations sheet repeats the period calendar structure and does not introduce additional independent logical tables."
+  }
+}

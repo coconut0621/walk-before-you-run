@@ -1,0 +1,596 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Periods",
+      "logical_name": "periods",
+      "n_rows": 68,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Period Start",
+          "logical_name": "period_start",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Start date of each monthly model period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no period defined",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Period End",
+          "logical_name": "period_end",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "End date of each monthly model period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no period end defined",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Period Start",
+        "block_id": "assumptions.period_columns",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "M6:CB7"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Taxable_Profits_Profile",
+      "logical_name": "taxable_profits_profile",
+      "n_rows": 68,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Period Start",
+          "logical_name": "period_start",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Monthly period start date identifying the taxable profits observation.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no period assigned",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Taxable Profits",
+          "logical_name": "taxable_profits",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Taxable profits value for the model period.",
+            "unit": "$",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no taxable profits value for the period",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -531813,
+            "max": 485916,
+            "mean": -34248.455882352944,
+            "median": -3744.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Taxable Profits Profile",
+        "block_id": "assumptions.taxable_profits_profile",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "E6:CB13"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "Tax_Rate_Schedule",
+      "logical_name": "tax_rate_schedule",
+      "n_rows": 13,
+      "profile": {
+        "density": 0.9846153846153847
+      },
+      "columns": [
+        {
+          "physical_name": "Rate",
+          "logical_name": "rate_label",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Label for each tax rate interval.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no rate interval label",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Date Start",
+          "logical_name": "date_start",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Start date on which the tax rate becomes effective.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no effective start date",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Date End",
+          "logical_name": "date_end",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "End date for the tax rate interval; null indicates the rate continues onwards.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "null indicates onward or open-ended rate period",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Open Ended",
+          "logical_name": "open_ended",
+          "dtype": "boolean",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Indicator that the rate interval has no stated end date.",
+            "unit": "",
+            "value_type": "boolean",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "not applicable",
+            "allowed_categories": [
+              true,
+              false
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Tax Rate",
+          "logical_name": "tax_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Applicable tax rate for the stated date interval.",
+            "unit": "%",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no tax rate recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.11,
+            "max": 0.19,
+            "mean": 0.15153846153846154,
+            "median": 0.15,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Rates Table",
+        "block_id": "assumptions.tax_rate_information.rates_table",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "D17:I32"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "Tax_Payment_Schedule",
+      "logical_name": "tax_payment_schedule",
+      "n_rows": 3,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Payment",
+          "logical_name": "payment_label",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Label identifying the payment tranche.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no payment tranche defined",
+            "allowed_categories": [
+              "First Payment",
+              "Second Payment",
+              "Third Payment"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Month Number",
+          "logical_name": "month_number",
+          "dtype": "integer",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Month of the subsequent year in which the payment is made.",
+            "unit": "month",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "payment month not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 4,
+            "max": 12,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Month Start",
+          "logical_name": "month_start",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Representative first day of the month used to label the payment month.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "payment month date missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Portion of bill to be paid in month",
+          "logical_name": "payment_portion",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Proportion of the annual tax bill allocated to the payment month.",
+            "unit": "%",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              1
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "payment share not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.15,
+            "max": 0.6,
+            "mean": 0.3333333333333333,
+            "median": 0.25,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Tax payments to be made in subsequent year",
+        "block_id": "assumptions.tax_payment_schedule",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "D37:I41"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "Tax_Loss_Expiry_Parameters",
+      "logical_name": "tax_loss_expiry_parameters",
+      "n_rows": 1,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Parameter",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the tax loss expiry assumption.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no parameter name",
+            "allowed_categories": [
+              "Losses expire after [n] years:"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit associated with the parameter value.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit not shown",
+            "allowed_categories": [
+              "years"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Configured number of years after which tax losses expire.",
+            "unit": "years",
+            "value_type": "integer",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "parameter value missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2,
+            "max": 2,
+            "mean": 2.0,
+            "median": 2.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Tax Loss Expiry Inputs",
+        "block_id": "assumptions.tax_loss_expiry_inputs",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "D48:I48"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": [
+        "Period Start"
+      ],
+      "child_key": [
+        "Period Start"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Tax assumption dataset containing monthly periods, a monthly taxable profits profile, tax rate intervals, tax payment timing assumptions, and a loss expiry parameter extracted from the workbook.",
+    "n_tables": 5,
+    "notes": "The wide monthly columns were normalized into a period dimension and a long taxable profits fact table. Tax rates, payment assumptions, and the loss expiry input were extracted from separate assumption blocks on the Assumptions sheet."
+  }
+}

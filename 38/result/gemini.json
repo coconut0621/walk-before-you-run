@@ -1,0 +1,482 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Installations_by_System_Type",
+      "logical_name": "monthly_installations",
+      "n_rows": 12,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Month",
+          "logical_name": "month",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "First day of the installation month.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unknown date",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "System_Type",
+          "logical_name": "system_type",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Categorical identifier for the size class of the solar system (Small or Large).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unknown system type",
+            "allowed_categories": [
+              "Small",
+              "Large"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Systems_Installed",
+          "logical_name": "systems_installed",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Count of solar systems installed during the given month for the specific system type.",
+            "unit": "systems",
+            "value_type": "integer",
+            "expected_range": null,
+            "higher_is_better": true,
+            "missing_value_meaning": "no installations recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 33,
+            "max": 52,
+            "mean": 41.5,
+            "median": 40.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Installation Assumptions and Exchange Rate Assumptions",
+        "block_id": "assumptions.installations_fx",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C36:E42"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Monthly_Exchange_Rates",
+      "logical_name": "monthly_exchange_rates",
+      "n_rows": 12,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Month",
+          "logical_name": "month",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "First day of the month the exchange rate applies to.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unknown date",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Currency_Pair",
+          "logical_name": "currency_pair",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The specific fiat currency pairing for the exchange rate.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unknown pair",
+            "allowed_categories": [
+              "AUD:USD",
+              "USD:AUD"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Exchange_Rate",
+          "logical_name": "exchange_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The conversion multiplier for the given currency pair in the specified month.",
+            "unit": "rate",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "rate not available",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.831,
+            "max": 1.203369,
+            "mean": 1.018,
+            "median": 1.014,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Installation Assumptions and Exchange Rate Assumptions",
+        "block_id": "assumptions.installations_fx_rates",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C36:G42"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "System_Operational_Assumptions",
+      "logical_name": "system_parameters",
+      "n_rows": 2,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "System_Type",
+          "logical_name": "system_type",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Categorical identifier for the size class of the solar system.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unknown system class",
+            "allowed_categories": [
+              "Small",
+              "Large"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "System_Cost_USD",
+          "logical_name": "system_cost_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Base hardware cost of the solar system in USD.",
+            "unit": "USD",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": false,
+            "missing_value_meaning": "cost not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Capacity_kW",
+          "logical_name": "capacity_kw",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Maximum power generation capacity per system in kilowatts.",
+            "unit": "kW/system",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": true,
+            "missing_value_meaning": "capacity not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Tariff_A_Usage_kWh_day",
+          "logical_name": "tariff_a_usage_kwh_day",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Expected daily energy usage under Tariff A per system.",
+            "unit": "kWh/day/system",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": false,
+            "missing_value_meaning": "usage not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Operational Assumptions",
+        "block_id": "assumptions.system_specific_params",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "B10:C26"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "General_Operational_Assumptions",
+      "logical_name": "general_assumptions",
+      "n_rows": 7,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Parameter_Name",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The name of the general operational assumption variable.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unknown parameter",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "The unit of measurement for the parameter.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unitless or inferred",
+            "allowed_categories": [
+              "AU$",
+              "kWh/kW/day",
+              "% p.a.",
+              "AU$/kWh"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "The baseline numeric assumption for the given parameter.",
+            "unit": "mixed",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Operational Assumptions",
+        "block_id": "assumptions.general_params",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "B13:C31"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T3",
+      "child_table_id": "T1",
+      "parent_key": [
+        "System_Type"
+      ],
+      "child_key": [
+        "System_Type"
+      ],
+      "description": "Each installation count record is linked to the base operational parameters of its specific system class."
+    }
+  ],
+  "dataset_summary": {
+    "n_tables": 4,
+    "primary_domain": "renewable energy operations & financial modeling",
+    "overall_quality_score": 0.85,
+    "notes": "Extracted from an Excel assumption inputs sheet. Transformed wide tabular layouts containing repeated periods and system classes into long-form normalized tables (monthly installations, FX rates). Derived a centralized parameter table for general metrics and a dimension table for specific size-class metrics to minimize redundant layout matrices."
+  }
+}

@@ -1,0 +1,893 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "DimYear",
+      "logical_name": "dim_year",
+      "n_rows": 7,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "YearLabel",
+          "logical_name": "year_label",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Label representing the financial year, such as 'Year -1' through 'Year 5'.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no year label",
+            "allowed_categories": [
+              "Year -1",
+              "Year 0",
+              "Year 1",
+              "Year 2",
+              "Year 3",
+              "Year 4",
+              "Year 5"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "YearNumber",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Integer representation of the year relative to base, e.g., -1 for Year -1.",
+            "unit": "years",
+            "value_type": "integer",
+            "expected_range": [
+              -1,
+              5
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no year number",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -1,
+            "max": 5,
+            "mean": 2.0,
+            "median": 2.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PeriodType",
+          "logical_name": "period_type",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Denotes whether the year is historical ('Hist') or projected ('Proj').",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "not specified",
+            "allowed_categories": [
+              "Hist",
+              "Proj"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "IncState",
+        "anchor_text": "Income statement",
+        "block_id": "incstate.year_dimension",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "C1:I2"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "IncomeStatementFact",
+      "logical_name": "income_statement_fact",
+      "n_rows": 168,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "LineItem",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Income statement line item name.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "YearLabel",
+          "logical_name": "year_label",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to dim_year.YearLabel identifying the financial year.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": [
+              "Year -1",
+              "Year 0",
+              "Year 1",
+              "Year 2",
+              "Year 3",
+              "Year 4",
+              "Year 5"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Value of the income statement line item for the specified year.",
+            "unit": "monetary units",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "value not available",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -328.0,
+            "max": 15209.289536697,
+            "mean": 2377.2225078080983,
+            "median": 1036.2954186945167,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.125,
+              "n_outliers": 21,
+              "top_1_outlier": 15209.289536697
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "IncState",
+        "anchor_text": "Income statement",
+        "block_id": "incstate.data",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C3:I26"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "BalanceSheetFact",
+      "logical_name": "balance_sheet_fact",
+      "n_rows": 154,
+      "profile": {
+        "density": 0.9025974026
+      },
+      "columns": [
+        {
+          "physical_name": "LineItem",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Balance sheet line item name.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "YearLabel",
+          "logical_name": "year_label",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to dim_year.YearLabel identifying the financial year.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": [
+              "Year -1",
+              "Year 0",
+              "Year 1",
+              "Year 2",
+              "Year 3",
+              "Year 4",
+              "Year 5"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Value of the balance sheet item for the specified year.",
+            "unit": "monetary units",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "value not available",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.0,
+            "max": 19743.670544531677,
+            "mean": 3067.271474272338,
+            "median": 1522.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.07339449541284404,
+              "n_outliers": 8,
+              "top_1_outlier": 19743.670544531677
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "BalSheet",
+        "anchor_text": "Balance sheet",
+        "block_id": "balsheet.data",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C3:I24"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "CashFlowFact",
+      "logical_name": "cash_flow_fact",
+      "n_rows": 126,
+      "profile": {
+        "density": 0.791005291
+      },
+      "columns": [
+        {
+          "physical_name": "LineItem",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Cash flow statement line item name.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "YearLabel",
+          "logical_name": "year_label",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to dim_year.YearLabel identifying the financial year.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": [
+              "Year -1",
+              "Year 0",
+              "Year 1",
+              "Year 2",
+              "Year 3",
+              "Year 4",
+              "Year 5"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Value of the cash flow statement line item for the specified year.",
+            "unit": "monetary units",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "value not available",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -641.5400217000001,
+            "max": 7566.094157233628,
+            "mean": 1026.2859831468588,
+            "median": 0.069,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.46808510638297873,
+              "n_outliers": 22,
+              "top_1_outlier": 7566.094157233628
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "CashFlow",
+        "anchor_text": "Cash flow statement",
+        "block_id": "cashflow.data",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C4:I23"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "CalculationsFact",
+      "logical_name": "calculations_fact",
+      "n_rows": 119,
+      "profile": {
+        "density": 0.9383753501
+      },
+      "columns": [
+        {
+          "physical_name": "CalcItem",
+          "logical_name": "calc_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the calculation or intermediate variable.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no calculation item",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "YearLabel",
+          "logical_name": "year_label",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to dim_year.YearLabel identifying the financial year.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": [
+              "Year -1",
+              "Year 0",
+              "Year 1",
+              "Year 2",
+              "Year 3",
+              "Year 4",
+              "Year 5"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Value of the calculation item for the specified year.",
+            "unit": "monetary units",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "value not available",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.0,
+            "max": 19743.670544531677,
+            "mean": 3683.553421568681,
+            "median": 2650.3068008,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.05154639175257732,
+              "n_outliers": 5,
+              "top_1_outlier": 19743.670544531677
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Calcs",
+        "anchor_text": "Calculations",
+        "block_id": "calcs.data",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C3:I22"
+      }
+    },
+    {
+      "table_id": "T6",
+      "physical_name": "AssumptionsFact",
+      "logical_name": "assumptions_fact",
+      "n_rows": 287,
+      "profile": {
+        "density": 0.9117305459
+      },
+      "columns": [
+        {
+          "physical_name": "Assumption",
+          "logical_name": "assumption_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the assumption parameter (growth rates, percentages, etc.).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no assumption",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "YearLabel",
+          "logical_name": "year_label",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to dim_year.YearLabel identifying the financial year.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": [
+              "Year -1",
+              "Year 0",
+              "Year 1",
+              "Year 2",
+              "Year 3",
+              "Year 4",
+              "Year 5"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Value of the assumption for the specified year (percentage, ratio or amount).",
+            "unit": "various",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "value not available",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -328.0,
+            "max": 1269.0,
+            "mean": 26.97124033131824,
+            "median": 0.08884081754438311,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.1895734597156398,
+              "n_outliers": 40,
+              "top_1_outlier": 1269.0
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Inputs",
+        "block_id": "assumptions.data",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C5:I35"
+      }
+    },
+    {
+      "table_id": "T7",
+      "physical_name": "DebtScheduleFact",
+      "logical_name": "debt_schedule_fact",
+      "n_rows": 329,
+      "profile": {
+        "density": 0.7274569402
+      },
+      "columns": [
+        {
+          "physical_name": "DebtItem",
+          "logical_name": "debt_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the debt schedule line item.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no debt item",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "YearLabel",
+          "logical_name": "year_label",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to dim_year.YearLabel identifying the financial year.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no year",
+            "allowed_categories": [
+              "Year -1",
+              "Year 0",
+              "Year 1",
+              "Year 2",
+              "Year 3",
+              "Year 4",
+              "Year 5"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Value of the debt schedule item for the specified year.",
+            "unit": "monetary units",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "value not available",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -250.0,
+            "max": 2022.0,
+            "mean": 108.39583333333333,
+            "median": 0.06,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.36666666666666664,
+              "n_outliers": 22,
+              "top_1_outlier": 2022.0
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Debt",
+        "anchor_text": "Debt",
+        "block_id": "debt.data",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C4:I40"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "parent_key": [
+        "YearLabel"
+      ],
+      "child_table_id": "T2",
+      "child_key": [
+        "YearLabel"
+      ],
+      "n_rows": 168,
+      "relationship_description": "Each income statement fact references a year dimension."
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T1",
+      "parent_key": [
+        "YearLabel"
+      ],
+      "child_table_id": "T3",
+      "child_key": [
+        "YearLabel"
+      ],
+      "n_rows": 154,
+      "relationship_description": "Each balance sheet fact references a year dimension."
+    },
+    {
+      "relation_id": "R3",
+      "parent_table_id": "T1",
+      "parent_key": [
+        "YearLabel"
+      ],
+      "child_table_id": "T4",
+      "child_key": [
+        "YearLabel"
+      ],
+      "n_rows": 126,
+      "relationship_description": "Each cash flow fact references a year dimension."
+    },
+    {
+      "relation_id": "R4",
+      "parent_table_id": "T1",
+      "parent_key": [
+        "YearLabel"
+      ],
+      "child_table_id": "T5",
+      "child_key": [
+        "YearLabel"
+      ],
+      "n_rows": 119,
+      "relationship_description": "Each calculation fact references a year dimension."
+    },
+    {
+      "relation_id": "R5",
+      "parent_table_id": "T1",
+      "parent_key": [
+        "YearLabel"
+      ],
+      "child_table_id": "T6",
+      "child_key": [
+        "YearLabel"
+      ],
+      "n_rows": 287,
+      "relationship_description": "Each assumption fact references a year dimension."
+    },
+    {
+      "relation_id": "R6",
+      "parent_table_id": "T1",
+      "parent_key": [
+        "YearLabel"
+      ],
+      "child_table_id": "T7",
+      "child_key": [
+        "YearLabel"
+      ],
+      "n_rows": 329,
+      "relationship_description": "Each debt schedule fact references a year dimension."
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Financial-model workbook normalized into a year dimension plus long fact tables for the major statements, schedules, and assumptions blocks.",
+    "n_tables": 7,
+    "notes": "Represent the logical structure rather than the raw sheet layout: repeated period columns are normalized into a year dimension plus long fact tables, and redundant wide sheet-level blocks are not emitted."
+  }
+}

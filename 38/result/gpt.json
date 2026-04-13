@@ -1,0 +1,561 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "operational_assumption_parameters",
+      "logical_name": "operational_assumption_parameters",
+      "n_rows": 13,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Parameter Name",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique operational assumption item listed in the assumptions block.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "parameter not listed in the workbook block",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Section",
+          "logical_name": "section",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Section heading under which the operational assumption item is grouped.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "section not indicated",
+            "allowed_categories": [
+              "Costs",
+              "Capacity",
+              "Performance",
+              "Revenues"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Displayed unit for the operational assumption item.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit not shown",
+            "allowed_categories": [
+              "[US$]",
+              "[AU$]",
+              "[kW/system]",
+              "[kWh/kW/day]",
+              "[% p.a.]",
+              "[kWh/day/system]",
+              "[AU$/kWh]"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Operational Assumptions",
+        "block_id": "assumptions.operational_assumptions",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "B10:C32"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "months",
+      "logical_name": "months",
+      "n_rows": 24,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Month",
+          "logical_name": "month",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Month-start date used for monthly installation and exchange-rate assumptions.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": [
+              "2013-07-01",
+              "2015-06-01"
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "month not represented in the source block",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": "2013-07-01",
+            "max": "2015-06-01",
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Installation Assumptions and Exchange Rate Assumptions",
+        "block_id": "assumptions.month_values",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "C37:C60"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "system_sizes",
+      "logical_name": "system_sizes",
+      "n_rows": 2,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "System Size",
+          "logical_name": "system_size",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "System size category derived from the monthly installation count headers.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "system size category not present",
+            "allowed_categories": [
+              "Small system",
+              "Large system"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Installation Assumptions and Exchange Rate Assumptions",
+        "block_id": "assumptions.system_size_headers",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "D36:E36"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "monthly_system_installations",
+      "logical_name": "monthly_system_installations",
+      "n_rows": 48,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "installation_assumption_id",
+          "logical_name": "installation_assumption_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Generated stable identifier for each normalized monthly system installation assumption record.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              48
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no installation assumption record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 48,
+            "mean": 24.5,
+            "median": 24.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Month",
+          "logical_name": "month",
+          "dtype": "date",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Month-start date linking the installation assumption record to the month dimension.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": [
+              "2013-07-01",
+              "2015-06-01"
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "month not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": "2013-07-01",
+            "max": "2015-06-01",
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "System Size",
+          "logical_name": "system_size",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "System size category linking the record to the system size dimension.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "system size not linked",
+            "allowed_categories": [
+              "Small system",
+              "Large system"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Number of systems installed",
+          "logical_name": "systems_installed",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Monthly number of installed systems for the specified system size.",
+            "unit": "systems",
+            "value_type": "integer",
+            "expected_range": [
+              33,
+              94
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "installation count not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 33,
+            "max": 94,
+            "mean": 60.5,
+            "median": 59.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Installation Assumptions and Exchange Rate Assumptions",
+        "block_id": "assumptions.monthly_installations",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C36:E60"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "monthly_exchange_rates",
+      "logical_name": "monthly_exchange_rates",
+      "n_rows": 24,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "exchange_rate_assumption_id",
+          "logical_name": "exchange_rate_assumption_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Generated stable identifier for each monthly exchange-rate assumption record.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              24
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no exchange-rate record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 24,
+            "mean": 12.5,
+            "median": 12.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Month",
+          "logical_name": "month",
+          "dtype": "date",
+          "role": "foreign_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Month-start date linking the exchange-rate record to the month dimension.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": [
+              "2013-07-01",
+              "2015-06-01"
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "month not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": "2013-07-01",
+            "max": "2015-06-01",
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "AUD_to_USD",
+          "logical_name": "aud_to_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Exchange rate shown under the header '1.00 AUD:USD. 1 AUD is equal to:'.",
+            "unit": "USD per AUD",
+            "value_type": "continuous",
+            "expected_range": [
+              0.817,
+              1.055
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "exchange rate not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.817,
+            "max": 1.055,
+            "mean": 0.931125,
+            "median": 0.904,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "USD_to_AUD",
+          "logical_name": "usd_to_aud",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Exchange rate shown under the header '1.00 USD: AUD. 1 USD is equal to:'.",
+            "unit": "AUD per USD",
+            "value_type": "continuous",
+            "expected_range": [
+              0.9478672985781991,
+              1.2239902080783354
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "exchange rate not provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.9478672985781991,
+            "max": 1.2239902080783354,
+            "mean": 1.0817213025,
+            "median": 1.1062001047463814,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Installation Assumptions and Exchange Rate Assumptions",
+        "block_id": "assumptions.monthly_exchange_rates",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "C36:G60"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T2",
+      "child_table_id": "T4",
+      "parent_key": [
+        "Month"
+      ],
+      "child_key": [
+        "Month"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T3",
+      "child_table_id": "T4",
+      "parent_key": [
+        "System Size"
+      ],
+      "child_key": [
+        "System Size"
+      ]
+    },
+    {
+      "relation_id": "R3",
+      "parent_table_id": "T2",
+      "child_table_id": "T5",
+      "parent_key": [
+        "Month"
+      ],
+      "child_key": [
+        "Month"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Energy operations assumptions dataset with an operational-parameter catalog, monthly installation assumptions by system size, and monthly AUD/USD exchange-rate assumptions.",
+    "n_tables": 5,
+    "notes": "The 'Operational Assumptions' block provides parameter names and units only in the extracted cells; monthly rows span 2013-07-01 through 2015-06-01."
+  }
+}

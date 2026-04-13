@@ -1,0 +1,1440 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Periods",
+      "logical_name": "periods",
+      "n_rows": 7,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "PeriodID",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Surrogate key for each model period appearing across the workbook.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              7
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no period record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 7,
+            "mean": 4.0,
+            "median": 4.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PeriodLabel",
+          "logical_name": "period_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Displayed year label from the workbook header.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period label missing",
+            "allowed_categories": [
+              "Year -1",
+              "Year 0",
+              "Year 1",
+              "Year 2",
+              "Year 3",
+              "Year 4",
+              "Year 5"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "PeriodIndex",
+          "logical_name": "period_index",
+          "dtype": "integer",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Relative period number derived from the displayed year label.",
+            "unit": "years",
+            "value_type": "integer",
+            "expected_range": [
+              -1,
+              5
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period index missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -1,
+            "max": 5,
+            "mean": 2.0,
+            "median": 2.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PeriodType",
+          "logical_name": "period_type",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Header classification showing whether the period is historical or projected.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period type missing",
+            "allowed_categories": [
+              "Hist",
+              "Proj"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Inputs",
+        "block_id": "assumptions.period_headers",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "C1:I2"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "AssumptionMetrics",
+      "logical_name": "assumption_metrics",
+      "n_rows": 34,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "AssumptionMetricID",
+          "logical_name": "assumption_metric_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Surrogate key for each unique assumption line item.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              34
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no assumption metric record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 34,
+            "mean": 17.5,
+            "median": 17.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "AssumptionLabel",
+          "logical_name": "assumption_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Workbook label for the assumption item.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption label missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "AssumptionSection",
+          "logical_name": "assumption_section",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Nearest section or subgroup heading associated with the assumption line.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "section not identified",
+            "allowed_categories": [
+              "Sales assumptions",
+              "Expense assumptions",
+              "Short-term assets",
+              "Long-term assets",
+              "Short-term liabilities",
+              "Long-term liabilities",
+              "Debt",
+              "Equity assumptions"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Inputs",
+        "block_id": "assumptions.input_block",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "B5:I47"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "AssumptionValues",
+      "logical_name": "assumption_values",
+      "n_rows": 211,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "AssumptionValueID",
+          "logical_name": "assumption_value_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Surrogate key for each assumption-period value.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              211
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no assumption value record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 211,
+            "mean": 106.0,
+            "median": 106.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "AssumptionMetricID",
+          "logical_name": "assumption_metric_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to the assumption metric being measured.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              34
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "metric not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 34,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "PeriodID",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to the model period for the assumption value.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              7
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 7,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "AssumptionValue",
+          "logical_name": "assumption_value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric assumption value for a given assumption item and period; units vary by assumption.",
+            "unit": "mixed by assumption",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption not populated for that period",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -328,
+            "max": 1269,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Inputs",
+        "block_id": "assumptions.input_block",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B5:I47"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "IncomeStatementValues",
+      "logical_name": "income_statement_values",
+      "n_rows": 168,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "IncomeStatementValueID",
+          "logical_name": "income_statement_value_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Surrogate key for each income statement line item value by period.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              168
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no income statement record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 168,
+            "mean": 84.5,
+            "median": 84.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PeriodID",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to the model period for the reported income statement value.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              7
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 7,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "LineItem",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Income statement line item label from the workbook.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item label missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Amount",
+          "logical_name": "amount",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric value reported for the income statement line item in the given period; units vary by line item.",
+            "unit": "mixed by line item",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item value missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -328,
+            "max": 15209.289536697,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "IncState",
+        "anchor_text": "Income statement",
+        "block_id": "incstate.income_statement",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B3:I32"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "BalanceSheetValues",
+      "logical_name": "balance_sheet_values",
+      "n_rows": 154,
+      "profile": {
+        "density": 0.927
+      },
+      "columns": [
+        {
+          "physical_name": "BalanceSheetValueID",
+          "logical_name": "balance_sheet_value_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Surrogate key for each balance sheet line item value by period.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              154
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no balance sheet record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 154,
+            "mean": 77.5,
+            "median": 77.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PeriodID",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to the model period for the balance sheet value.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              7
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 7,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "LineItem",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Balance sheet line item label from the workbook.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item label missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Amount",
+          "logical_name": "amount",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Numeric value reported for the balance sheet line item in the given period; workbook error cells such as #REF! are treated as missing.",
+            "unit": "mixed by line item",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "blank or formula error in the workbook",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 19743.670544531677,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "BalSheet",
+        "anchor_text": "Balance sheet",
+        "block_id": "balsheet.balance_sheet",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B3:I30"
+      }
+    },
+    {
+      "table_id": "T6",
+      "physical_name": "CashFlowValues",
+      "logical_name": "cash_flow_values",
+      "n_rows": 91,
+      "profile": {
+        "density": 0.879
+      },
+      "columns": [
+        {
+          "physical_name": "CashFlowValueID",
+          "logical_name": "cash_flow_value_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Surrogate key for each cash flow line item value by period.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              91
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no cash flow record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 91,
+            "mean": 46.0,
+            "median": 46.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PeriodID",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to the model period for the cash flow value.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              2,
+              7
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2,
+            "max": 7,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "LineItem",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Cash flow statement line item label from the workbook.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item label missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Amount",
+          "logical_name": "amount",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Numeric value reported for the cash flow line item in the given period; workbook error cells such as #REF! are treated as missing.",
+            "unit": "mixed by line item",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "blank or formula error in the workbook",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -641.5400217000001,
+            "max": 7566.094157233628,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "CashFlow",
+        "anchor_text": "Cash flow statement",
+        "block_id": "cashflow.cash_flow_statement",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B4:I26"
+      }
+    },
+    {
+      "table_id": "T7",
+      "physical_name": "WorkingCapitalValues",
+      "logical_name": "working_capital_values",
+      "n_rows": 54,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "WorkingCapitalValueID",
+          "logical_name": "working_capital_value_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Surrogate key for each working capital schedule line item value by period.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              54
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no working capital record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 54,
+            "mean": 27.5,
+            "median": 27.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PeriodID",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to the model period for the working capital schedule value.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              2,
+              7
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2,
+            "max": 7,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "LineItem",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Working capital schedule line item label from the calculations sheet.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item label missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Amount",
+          "logical_name": "amount",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric value for the working capital schedule line item in the given period.",
+            "unit": "mixed by line item",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item not populated for that period",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 161,
+            "max": 5844.169504475823,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Calcs",
+        "anchor_text": "OWC",
+        "block_id": "calcs.owc_schedule",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B19:I29"
+      }
+    },
+    {
+      "table_id": "T8",
+      "physical_name": "DebtInstruments",
+      "logical_name": "debt_instruments",
+      "n_rows": 4,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "DebtInstrumentID",
+          "logical_name": "debt_instrument_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Surrogate key for each debt instrument tracked in the debt schedule.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              4
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no debt instrument record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 4,
+            "mean": 2.5,
+            "median": 2.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "InstrumentName",
+          "logical_name": "instrument_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Displayed name of the debt instrument.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "instrument name missing",
+            "allowed_categories": [
+              "Revolver",
+              "Debt 1",
+              "Debt 2",
+              "Debt 3"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "InstrumentClass",
+          "logical_name": "instrument_class",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Normalized class of debt instrument derived from section headings.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "instrument class not identified",
+            "allowed_categories": [
+              "revolver",
+              "long_term_debt"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "IsRevolving",
+          "logical_name": "is_revolving",
+          "dtype": "boolean",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Indicator for whether the instrument is the revolving credit facility.",
+            "unit": "",
+            "value_type": "boolean",
+            "expected_range": [
+              false,
+              true
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "revolving classification unknown",
+            "allowed_categories": [
+              true,
+              false
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "RankOrder",
+          "logical_name": "rank_order",
+          "dtype": "integer",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Display order of instruments in the debt schedule.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              4
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "order not assigned",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 4,
+            "mean": 2.5,
+            "median": 2.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Debt",
+        "anchor_text": "Debt",
+        "block_id": "debt.instrument_list",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "A11:B49"
+      }
+    },
+    {
+      "table_id": "T9",
+      "physical_name": "DebtMetricValues",
+      "logical_name": "debt_metric_values",
+      "n_rows": 119,
+      "profile": {
+        "density": 0.872
+      },
+      "columns": [
+        {
+          "physical_name": "DebtMetricValueID",
+          "logical_name": "debt_metric_value_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Surrogate key for each debt metric by instrument and period.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              119
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no debt metric record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 119,
+            "mean": 60.0,
+            "median": 60.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "DebtInstrumentID",
+          "logical_name": "debt_instrument_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to the debt instrument for the recorded metric.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              4
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "instrument not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 4,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "PeriodID",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Reference to the model period for the debt metric.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              2,
+              7
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2,
+            "max": 7,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "DebtMetric",
+          "logical_name": "debt_metric",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Debt schedule metric label associated with the instrument and period.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "metric label missing",
+            "allowed_categories": [
+              "Beginning balance",
+              "Issuance / (repayment)",
+              "Actual mandated repayment",
+              "Accelerated repayment",
+              "Ending balance",
+              "Interest rate",
+              "Interest expense"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Numeric debt schedule value for the given instrument, metric, and period; workbook error cells such as #REF! are treated as missing.",
+            "unit": "mixed by metric",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "blank or formula error in the workbook",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -250,
+            "max": 1000,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Debt",
+        "anchor_text": "Debt",
+        "block_id": "debt.schedule_block",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B13:I49"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T3",
+      "parent_key": [
+        "PeriodID"
+      ],
+      "child_key": [
+        "PeriodID"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T2",
+      "child_table_id": "T3",
+      "parent_key": [
+        "AssumptionMetricID"
+      ],
+      "child_key": [
+        "AssumptionMetricID"
+      ]
+    },
+    {
+      "relation_id": "R3",
+      "parent_table_id": "T1",
+      "child_table_id": "T4",
+      "parent_key": [
+        "PeriodID"
+      ],
+      "child_key": [
+        "PeriodID"
+      ]
+    },
+    {
+      "relation_id": "R4",
+      "parent_table_id": "T1",
+      "child_table_id": "T5",
+      "parent_key": [
+        "PeriodID"
+      ],
+      "child_key": [
+        "PeriodID"
+      ]
+    },
+    {
+      "relation_id": "R5",
+      "parent_table_id": "T1",
+      "child_table_id": "T6",
+      "parent_key": [
+        "PeriodID"
+      ],
+      "child_key": [
+        "PeriodID"
+      ]
+    },
+    {
+      "relation_id": "R6",
+      "parent_table_id": "T1",
+      "child_table_id": "T7",
+      "parent_key": [
+        "PeriodID"
+      ],
+      "child_key": [
+        "PeriodID"
+      ]
+    },
+    {
+      "relation_id": "R7",
+      "parent_table_id": "T8",
+      "child_table_id": "T9",
+      "parent_key": [
+        "DebtInstrumentID"
+      ],
+      "child_key": [
+        "DebtInstrumentID"
+      ]
+    },
+    {
+      "relation_id": "R8",
+      "parent_table_id": "T1",
+      "child_table_id": "T9",
+      "parent_key": [
+        "PeriodID"
+      ],
+      "child_key": [
+        "PeriodID"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Seven-period financial model case study normalized from a multi-sheet Excel workbook into period, assumption, financial statement, working capital, and debt schedule tables.",
+    "n_tables": 9,
+    "notes": "The workbook uses repeated year columns across sheets and contains intentional model errors; wide blocks were converted to long fact tables, and formula error outputs such as #REF! were treated as missing numeric values."
+  }
+}

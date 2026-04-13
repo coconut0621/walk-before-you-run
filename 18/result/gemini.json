@@ -1,0 +1,314 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Periods",
+      "logical_name": "periods",
+      "n_rows": 82,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Period Start",
+          "logical_name": "period_start",
+          "dtype": "date",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The first day of the financial modeling period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Period End",
+          "logical_name": "period_end",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The last day of the financial modeling period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Calculations",
+        "anchor_text": "Period Start",
+        "block_id": "calculations.timeline",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "E6:CD7"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Calculations Fact",
+      "logical_name": "calculations_fact",
+      "n_rows": 4100,
+      "profile": {
+        "density": 0.95
+      },
+      "columns": [
+        {
+          "physical_name": "Line Item",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The name of the calculated metric or financial line item.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unspecified line item",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Period Start",
+          "logical_name": "period_start",
+          "dtype": "date",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The start date of the period for the calculated value.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no period defined",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "The calculated financial value for the given line item and period.",
+            "unit": "various",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "zero or missing value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 0.98,
+            "type_consistency": 1.0,
+            "min": -1500000.0,
+            "max": 12500000.0,
+            "mean": 45000.0,
+            "median": 0.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.04,
+              "n_outliers": 164,
+              "top_1_outlier": 12500000.0
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Calculations",
+        "anchor_text": "Calculations",
+        "block_id": "calculations.fact_table",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C8:CD150"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "Assumptions Parameters",
+      "logical_name": "assumptions_parameters",
+      "n_rows": 45,
+      "profile": {
+        "density": 0.98
+      },
+      "columns": [
+        {
+          "physical_name": "Parameter Name",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The name of the assumed property, rate, or parameter.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "The unit of measure for the parameter (e.g., [%], [date]).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no unit specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The value of the assumption.",
+            "unit": "various",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 0.85,
+            "type_consistency": 0.85,
+            "min": 0.01,
+            "max": 1000000.0,
+            "mean": 25000.0,
+            "median": 0.08,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.05,
+              "n_outliers": 2,
+              "top_1_outlier": 1000000.0
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Assumptions",
+        "block_id": "assumptions.parameters_table",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "C10:F60"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": [
+        "Period Start"
+      ],
+      "child_key": [
+        "Period Start"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "logical_dataset_name": "ModelOff 2017 Castles In The Air Financial Model",
+    "plain_description": "A financial model dataset containing time-series assumptions, static valuation parameters, and calculated financial projections across multiple periods.",
+    "n_tables": 3,
+    "n_relations": 1,
+    "structural_notes": [
+      "Extracted a normalized dimensional periods table (T1) from the repeated horizontal time-series headers found in the Calculations sheet.",
+      "Converted the wide time-series blocks into a long fact table (T2) linking line items to their respective periods.",
+      "Extracted a vertical key-value parameter table (T3) for global assumptions like discount rates and base dates."
+    ]
+  }
+}

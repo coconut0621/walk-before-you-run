@@ -1,0 +1,1751 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "model_info",
+      "logical_name": "model_info",
+      "n_rows": 1,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "round_label",
+          "logical_name": "round_label",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Model round label shown in the workbook header.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "round label not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "company_name",
+          "logical_name": "company_name",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Company or case name used for the model.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "company name not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "currency_units",
+          "logical_name": "currency_units",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Currency and unit convention used throughout the model.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "currency/unit convention not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "first_forecast_period",
+          "logical_name": "first_forecast_period_end_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "End date of the first forecast year.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "first forecast period not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": "2016-06-30",
+            "max": "2016-06-30",
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Headings",
+        "block_id": "inputs.model_info",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "C4:E21"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "forecast_periods",
+      "logical_name": "forecast_periods",
+      "n_rows": 15,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Counter",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential forecast period counter derived from the model timeline.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no forecast period",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 15,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "period_end_date",
+          "logical_name": "period_end_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast period end date from the model timeline.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period end date missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": "2016-06-30",
+            "max": "2030-06-30",
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "fiscal_year",
+          "logical_name": "fiscal_year",
+          "dtype": "integer",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Calendar year associated with the forecast period end date.",
+            "unit": "year",
+            "value_type": "integer",
+            "expected_range": [
+              2016,
+              2030
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "year not derived",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2016,
+            "max": 2030,
+            "mean": 2023.0,
+            "median": 2023.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Timeline",
+        "block_id": "inputs.timeline",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "C23:T25"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "product_categories",
+      "logical_name": "product_categories",
+      "n_rows": 3,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Category",
+          "logical_name": "product_category",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Distinct widget category used in pricing assumptions.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "category not assigned",
+            "allowed_categories": [
+              "Low value",
+              "Mid value",
+              "High value"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Widget categories",
+        "block_id": "inputs.widget_categories",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "C47:D55"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "products",
+      "logical_name": "products",
+      "n_rows": 8,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Widget",
+          "logical_name": "product_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Widget product name.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "product name missing",
+            "allowed_categories": [
+              "Widget A",
+              "Widget B",
+              "Widget C",
+              "Widget D",
+              "Widget E",
+              "Widget F",
+              "Widget G",
+              "Widget H"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Category",
+          "logical_name": "product_category",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Category assigned to the widget in the pricing assumptions block.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "product category not assigned",
+            "allowed_categories": [
+              "Low value",
+              "Mid value",
+              "High value"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Sales (m units)",
+        "block_id": "inputs.widget_master",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "C37:D55"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "pricing_scenarios",
+      "logical_name": "pricing_scenarios",
+      "n_rows": 2,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Scenario",
+          "logical_name": "pricing_scenario",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Named pricing scenario available in the workbook.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "scenario not defined",
+            "allowed_categories": [
+              "Base",
+              "Growth"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "is_selected",
+          "logical_name": "is_selected_pricing_scenario",
+          "dtype": "boolean",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Flag indicating the scenario selected for the live model run.",
+            "unit": "",
+            "value_type": "boolean",
+            "expected_range": [
+              false,
+              true
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "selection state unknown",
+            "allowed_categories": [
+              false,
+              true
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Pricing scenario used",
+        "block_id": "inputs.pricing_scenarios",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "C57:T67"
+      }
+    },
+    {
+      "table_id": "T6",
+      "physical_name": "pricing_rows",
+      "logical_name": "pricing_rows",
+      "n_rows": 3,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "pricing_row_code",
+          "logical_name": "pricing_row_code",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Source row code used to index pricing and cost-of-sales assumption rows.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              2000,
+              4000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "pricing row not defined",
+            "allowed_categories": [
+              2000,
+              3000,
+              4000
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2000,
+            "max": 4000,
+            "mean": 3000.0,
+            "median": 3000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Revenue Pricing Assumptions",
+        "block_id": "inputs.pricing_row_codes",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "C60:C67"
+      }
+    },
+    {
+      "table_id": "T7",
+      "physical_name": "product_volume_assumptions",
+      "logical_name": "product_volume_assumptions",
+      "n_rows": 120,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "volume_assumption_id",
+          "logical_name": "volume_assumption_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived identifier for each product-period volume assumption record.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no volume assumption row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Widget",
+          "logical_name": "product_name",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Widget linked to the volume assumption.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "widget not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Counter",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast period counter for the volume assumption.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 15,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "sales_m_units",
+          "logical_name": "sales_volume_million_units",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast sales volume assumption for the widget.",
+            "unit": "units ms",
+            "value_type": "continuous",
+            "expected_range": [
+              25.0,
+              229.8948426475245
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "sales volume assumption missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 25.0,
+            "max": 229.8948426475245,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Sales (m units)",
+        "block_id": "inputs.revenue_volume_assumptions",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C37:T44"
+      }
+    },
+    {
+      "table_id": "T8",
+      "physical_name": "product_price_assumptions",
+      "logical_name": "product_price_assumptions",
+      "n_rows": 90,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "price_assumption_id",
+          "logical_name": "price_assumption_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived identifier for each scenario-row-period price assumption record.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no price assumption row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Scenario",
+          "logical_name": "pricing_scenario",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Pricing scenario to which the price belongs.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "scenario not linked",
+            "allowed_categories": [
+              "Base",
+              "Growth"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "pricing_row_code",
+          "logical_name": "pricing_row_code",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Source pricing row code for the assumption.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              2000,
+              4000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "pricing row not linked",
+            "allowed_categories": [
+              2000,
+              3000,
+              4000
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2000,
+            "max": 4000,
+            "mean": 3000.0,
+            "median": 3000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Counter",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast period counter for the price assumption.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 15,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "price_per_unit",
+          "logical_name": "price_per_unit",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Nominal unit price assumption for the scenario and pricing row.",
+            "unit": "$ / unit",
+            "value_type": "continuous",
+            "expected_range": [
+              60.0,
+              277.578535538309
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "price assumption missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 60.0,
+            "max": 277.578535538309,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Revenue Pricing Assumptions",
+        "block_id": "inputs.pricing_assumptions",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C60:T67"
+      }
+    },
+    {
+      "table_id": "T9",
+      "physical_name": "cost_of_sales_rate_assumptions",
+      "logical_name": "cost_of_sales_rate_assumptions",
+      "n_rows": 45,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "cos_rate_id",
+          "logical_name": "cost_of_sales_rate_assumption_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived identifier for each pricing-row-period cost-of-sales rate record.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no cost-of-sales rate row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "pricing_row_code",
+          "logical_name": "pricing_row_code",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Source pricing row code tied to the cost-of-sales rate.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              2000,
+              4000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "pricing row not linked",
+            "allowed_categories": [
+              2000,
+              3000,
+              4000
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2000,
+            "max": 4000,
+            "mean": 3000.0,
+            "median": 3000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Counter",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast period counter for the cost-of-sales rate.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 15,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "cost_of_sales_rate",
+          "logical_name": "cost_of_sales_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Cost of sales as a proportion of revenue for the pricing row.",
+            "unit": "%",
+            "value_type": "continuous",
+            "expected_range": [
+              0.6,
+              0.7
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "cost-of-sales rate missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.6,
+            "max": 0.7,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Cost Of Sales (%)",
+        "block_id": "inputs.cost_of_sales_rates",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C70:T72"
+      }
+    },
+    {
+      "table_id": "T10",
+      "physical_name": "assumption_metrics",
+      "logical_name": "assumption_metrics",
+      "n_rows": 25,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "metric_code",
+          "logical_name": "metric_code",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Stable derived code for an input assumption metric.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "metric not defined",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "input_label",
+          "logical_name": "input_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Original workbook label for the assumption metric.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "source label missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "assumption_group",
+          "logical_name": "assumption_group",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Logical section grouping for the assumption metric.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "group not assigned",
+            "allowed_categories": [
+              "economics",
+              "taxation",
+              "overheads",
+              "working_capital",
+              "capital_expenditure",
+              "depreciation",
+              "financing"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Workbook unit attached to the assumption metric.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "periodicity",
+          "logical_name": "periodicity",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Whether the metric is a scalar parameter or varies by forecast period.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "periodicity not classified",
+            "allowed_categories": [
+              "scalar",
+              "periodic"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Economic Assumptions",
+        "block_id": "inputs.multi_section_assumptions",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "B27:T109"
+      }
+    },
+    {
+      "table_id": "T11",
+      "physical_name": "assumption_values",
+      "logical_name": "assumption_values",
+      "n_rows": 305,
+      "profile": {
+        "density": 0.9959016393442623
+      },
+      "columns": [
+        {
+          "physical_name": "assumption_value_id",
+          "logical_name": "assumption_value_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived identifier for each assumption value record.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no assumption value row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "metric_code",
+          "logical_name": "metric_code",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Metric code linking the value to the assumption metric definition.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "metric not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Counter",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Forecast period for periodic assumptions; null for scalar assumptions.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "scalar assumption not tied to a period",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 15,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "assumption_value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric value of the assumption metric, either scalar or period-specific.",
+            "unit": "mixed",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption value missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -600.0,
+            "max": 12112.024517055,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Economic Assumptions",
+        "block_id": "inputs.multi_section_assumption_values",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B27:T109"
+      }
+    },
+    {
+      "table_id": "T12",
+      "physical_name": "financial_statement_line_items",
+      "logical_name": "financial_statement_line_items",
+      "n_rows": 51,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "line_item_id",
+          "logical_name": "line_item_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Stable derived identifier for a financial statement line item.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item not defined",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "statement_name",
+          "logical_name": "statement_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Financial statement to which the line item belongs.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "statement not assigned",
+            "allowed_categories": [
+              "profit_and_loss",
+              "balance_sheet",
+              "cash_flow"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "section_name",
+          "logical_name": "section_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Section within the financial statement where the line appears.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "section not assigned",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "line_label",
+          "logical_name": "line_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Visible label of the financial statement line item in the Outputs sheet.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line label missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "source_order",
+          "logical_name": "source_order",
+          "dtype": "integer",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Top-to-bottom order of the line item within the normalized output set.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              51
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "line order not assigned",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 51,
+            "mean": 26.0,
+            "median": 26.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Outputs",
+        "anchor_text": "Outputs",
+        "block_id": "outputs.financial_statement_lines",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "B6:T91"
+      }
+    },
+    {
+      "table_id": "T13",
+      "physical_name": "financial_statement_values",
+      "logical_name": "financial_statement_values",
+      "n_rows": 765,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "statement_value_id",
+          "logical_name": "statement_value_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived identifier for each line-item-period financial statement value.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no statement value row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "line_item_id",
+          "logical_name": "line_item_id",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Line item linked to the financial statement value.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Counter",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Forecast period counter for the financial statement value.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              15
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 15,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "statement_value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Financial statement amount for the given line item and forecast period.",
+            "unit": "$m",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "statement value missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Outputs",
+        "anchor_text": "Outputs",
+        "block_id": "outputs.financial_statement_values",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "B6:T91"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T3",
+      "child_table_id": "T4",
+      "parent_key": [
+        "Category"
+      ],
+      "child_key": [
+        "Category"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T2",
+      "child_table_id": "T7",
+      "parent_key": [
+        "Counter"
+      ],
+      "child_key": [
+        "Counter"
+      ]
+    },
+    {
+      "relation_id": "R3",
+      "parent_table_id": "T4",
+      "child_table_id": "T7",
+      "parent_key": [
+        "Widget"
+      ],
+      "child_key": [
+        "Widget"
+      ]
+    },
+    {
+      "relation_id": "R4",
+      "parent_table_id": "T5",
+      "child_table_id": "T8",
+      "parent_key": [
+        "Scenario"
+      ],
+      "child_key": [
+        "Scenario"
+      ]
+    },
+    {
+      "relation_id": "R5",
+      "parent_table_id": "T6",
+      "child_table_id": "T8",
+      "parent_key": [
+        "pricing_row_code"
+      ],
+      "child_key": [
+        "pricing_row_code"
+      ]
+    },
+    {
+      "relation_id": "R6",
+      "parent_table_id": "T2",
+      "child_table_id": "T8",
+      "parent_key": [
+        "Counter"
+      ],
+      "child_key": [
+        "Counter"
+      ]
+    },
+    {
+      "relation_id": "R7",
+      "parent_table_id": "T6",
+      "child_table_id": "T9",
+      "parent_key": [
+        "pricing_row_code"
+      ],
+      "child_key": [
+        "pricing_row_code"
+      ]
+    },
+    {
+      "relation_id": "R8",
+      "parent_table_id": "T2",
+      "child_table_id": "T9",
+      "parent_key": [
+        "Counter"
+      ],
+      "child_key": [
+        "Counter"
+      ]
+    },
+    {
+      "relation_id": "R9",
+      "parent_table_id": "T10",
+      "child_table_id": "T11",
+      "parent_key": [
+        "metric_code"
+      ],
+      "child_key": [
+        "metric_code"
+      ]
+    },
+    {
+      "relation_id": "R10",
+      "parent_table_id": "T2",
+      "child_table_id": "T11",
+      "parent_key": [
+        "Counter"
+      ],
+      "child_key": [
+        "Counter"
+      ]
+    },
+    {
+      "relation_id": "R11",
+      "parent_table_id": "T12",
+      "child_table_id": "T13",
+      "parent_key": [
+        "line_item_id"
+      ],
+      "child_key": [
+        "line_item_id"
+      ]
+    },
+    {
+      "relation_id": "R12",
+      "parent_table_id": "T2",
+      "child_table_id": "T13",
+      "parent_key": [
+        "Counter"
+      ],
+      "child_key": [
+        "Counter"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Normalized financial model dataset for The Widget Company Inc, containing forecast periods, product and pricing assumptions, general operating and financing assumptions, and long-form financial statement outputs.",
+    "n_tables": 13,
+    "notes": "The Inputs sheet was normalized into dimensions and long fact tables rather than kept as wide year-by-column blocks. The Calculations sheet was treated as intermediate model logic, while the Outputs sheet was normalized into financial statement line items and period values."
+  }
+}

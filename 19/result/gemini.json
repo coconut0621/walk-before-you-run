@@ -1,0 +1,339 @@
+{
+"tables": [
+{
+"table_id": "T1",
+"physical_name": "Assumptions_Matrix",
+"logical_name": "person_assumptions",
+"n_rows": 4,
+"profile": {
+"density": 1.0
+},
+"columns": [
+{
+"physical_name": "Assumptions",
+"logical_name": "person_name",
+"dtype": "string",
+"role": "primary_key",
+"is_unique": true,
+"is_nullable": false,
+"dictionary": {
+"plain_description": "Name of the individual account holder.",
+"unit": "",
+"value_type": "text",
+"expected_range": null,
+"higher_is_better": null,
+"missing_value_meaning": "unknown person",
+"allowed_categories": [
+"Alice",
+"Bob",
+"Charlie",
+"Diana"
+]
+},
+"profile": {
+"parse_success_rate": 1.0,
+"type_consistency": 1.0,
+"min": null,
+"max": null,
+"mean": null,
+"median": null,
+"format_consistency": null,
+"format_hint": null,
+"outlier": null
+}
+},
+{
+"physical_name": "Initial Account Deposit at 31 Dec 2016 ($)",
+"logical_name": "initial_deposit_usd",
+"dtype": "integer",
+"role": "numeric_feature",
+"is_unique": false,
+"is_nullable": false,
+"dictionary": {
+"plain_description": "Initial account deposit amount in USD at 31 Dec 2016[cite: 2].",
+"unit": "USD",
+"value_type": "continuous",
+"expected_range": null,
+"higher_is_better": true,
+"missing_value_meaning": "no deposit recorded",
+"allowed_categories": null
+},
+"profile": {
+"parse_success_rate": 1.0,
+"type_consistency": 1.0,
+"min": 0,
+"max": 40000,
+"mean": 14455.0,
+"median": 8910.0,
+"format_consistency": null,
+"format_hint": null,
+"outlier": {
+"outlier_rate": 0.0,
+"n_outliers": 0,
+"top_1_outlier": null
+}
+}
+},
+{
+"physical_name": "Annual Salary in 2017 ($)",
+"logical_name": "annual_salary_2017_usd",
+"dtype": "integer",
+"role": "numeric_feature",
+"is_unique": false,
+"is_nullable": false,
+"dictionary": {
+"plain_description": "Annual base salary of the person in the year 2017 in USD.",
+"unit": "USD",
+"value_type": "continuous",
+"expected_range": null,
+"higher_is_better": true,
+"missing_value_meaning": "salary not recorded",
+"allowed_categories": null
+},
+"profile": {
+"parse_success_rate": 1.0,
+"type_consistency": 1.0,
+"min": 35698,
+"max": 95000,
+"mean": 60549.5,
+"median": 55750.0,
+"format_consistency": null,
+"format_hint": null,
+"outlier": {
+"outlier_rate": 0.0,
+"n_outliers": 0,
+"top_1_outlier": null
+}
+}
+},
+{
+"physical_name": "Growth in annual salary each 1 January (beginning in 2018 unless noted)",
+"logical_name": "salary_growth_rule",
+"dtype": "string",
+"role": "free_text",
+"is_unique": false,
+"is_nullable": false,
+"dictionary": {
+"plain_description": "Text describing the specific rules for the individual's annual salary growth.",
+"unit": "",
+"value_type": "text",
+"expected_range": null,
+"higher_is_better": null,
+"missing_value_meaning": "no growth rule",
+"allowed_categories": null
+},
+"profile": {
+"parse_success_rate": 1.0,
+"type_consistency": 1.0,
+"min": null,
+"max": null,
+"mean": null,
+"median": null,
+"format_consistency": null,
+"format_hint": null,
+"outlier": null
+}
+},
+{
+"physical_name": "Core Deposits into Savings Account (beginning in 2017)",
+"logical_name": "core_deposits_rule",
+"dtype": "string",
+"role": "free_text",
+"is_unique": false,
+"is_nullable": false,
+"dictionary": {
+"plain_description": "Text detailing the frequency and percentage of core deposits into the savings account.",
+"unit": "",
+"value_type": "text",
+"expected_range": null,
+"higher_is_better": null,
+"missing_value_meaning": "no core deposits",
+"allowed_categories": null
+},
+"profile": {
+"parse_success_rate": 1.0,
+"type_consistency": 1.0,
+"min": null,
+"max": null,
+"mean": null,
+"median": null,
+"format_consistency": null,
+"format_hint": null,
+"outlier": null
+}
+},
+{
+"physical_name": "Additional Deposits into Savings Account",
+"logical_name": "additional_deposits_rule",
+"dtype": "string",
+"role": "free_text",
+"is_unique": false,
+"is_nullable": false,
+"dictionary": {
+"plain_description": "Text describing any one-off or recurring additional deposits beyond the core deposits.",
+"unit": "",
+"value_type": "text",
+"expected_range": null,
+"higher_is_better": null,
+"missing_value_meaning": "no additional deposits",
+"allowed_categories": null
+},
+"profile": {
+"parse_success_rate": 1.0,
+"type_consistency": 1.0,
+"min": null,
+"max": null,
+"mean": null,
+"median": null,
+"format_consistency": null,
+"format_hint": null,
+"outlier": null
+}
+},
+{
+"physical_name": "Date the Account is Withdrawn and Closed",
+"logical_name": "account_close_date",
+"dtype": "date",
+"role": "timestamp",
+"is_unique": true,
+"is_nullable": false,
+"dictionary": {
+"plain_description": "The exact forecasted date when the savings account is fully withdrawn and closed.",
+"unit": "date",
+"value_type": "timestamp",
+"expected_range": null,
+"higher_is_better": null,
+"missing_value_meaning": "date not provided",
+"allowed_categories": null
+},
+"profile": {
+"parse_success_rate": 1.0,
+"type_consistency": 1.0,
+"min": null,
+"max": null,
+"mean": null,
+"median": null,
+"format_consistency": 1.0,
+"format_hint": "YYYY-MM-DD",
+"outlier": null
+}
+},
+{
+"physical_name": "Forecasted Investment Returns",
+"logical_name": "investment_returns_rule",
+"dtype": "string",
+"role": "free_text",
+"is_unique": false,
+"is_nullable": false,
+"dictionary": {
+"plain_description": "Text describing the expected investment return rates and their compounding frequencies.",
+"unit": "",
+"value_type": "text",
+"expected_range": null,
+"higher_is_better": null,
+"missing_value_meaning": "no return rate provided",
+"allowed_categories": null
+},
+"profile": {
+"parse_success_rate": 1.0,
+"type_consistency": 1.0,
+"min": null,
+"max": null,
+"mean": null,
+"median": null,
+"format_consistency": null,
+"format_hint": null,
+"outlier": null
+}
+}
+],
+"source_ref": {
+"sheet_name": "Inputs",
+"anchor_text": "Assumptions",
+"block_id": "inputs.assumptions_matrix",
+"extraction_kind": "wide_single_measure_to_entity_table",
+"cell_region": "C9:G16"
+}
+},
+{
+"table_id": "T2",
+"physical_name": "Formatting Legend",
+"logical_name": "formatting_legend",
+"n_rows": 14,
+"profile": {
+"density": 1.0
+},
+"columns": [
+{
+"physical_name": "Format Rule",
+"logical_name": "format_rule",
+"dtype": "string",
+"role": "primary_key",
+"is_unique": true,
+"is_nullable": false,
+"dictionary": {
+"plain_description": "Name or description of the specific formatting rule applied in the workbook.",
+"unit": "",
+"value_type": "text",
+"expected_range": null,
+"higher_is_better": null,
+"missing_value_meaning": "unspecified rule",
+"allowed_categories": null
+},
+"profile": {
+"parse_success_rate": 1.0,
+"type_consistency": 1.0,
+"min": null,
+"max": null,
+"mean": null,
+"median": null,
+"format_consistency": null,
+"format_hint": null,
+"outlier": null
+}
+},
+{
+"physical_name": "Sample Value",
+"logical_name": "sample_value",
+"dtype": "string",
+"role": "categorical_feature",
+"is_unique": false,
+"is_nullable": false,
+"dictionary": {
+"plain_description": "Example value or display format corresponding to the formatting rule.",
+"unit": "",
+"value_type": "text",
+"expected_range": null,
+"higher_is_better": null,
+"missing_value_meaning": "no sample provided",
+"allowed_categories": null
+},
+"profile": {
+"parse_success_rate": 1.0,
+"type_consistency": 1.0,
+"min": null,
+"max": null,
+"mean": null,
+"median": null,
+"format_consistency": null,
+"format_hint": null,
+"outlier": null
+}
+}
+],
+"source_ref": {
+"sheet_name": "Formats",
+"anchor_text": "Formatting Legend",
+"block_id": "formats.legend",
+"extraction_kind": "parameter_block_to_table",
+"cell_region": "D13:I41"
+}
+}
+],
+"relations": [],
+"dataset_summary": {
+"plain_description": "Financial model assumptions detailing individual investment and saving parameters, alongside a workbook formatting legend.",
+"n_tables": 2,
+"notes": "The assumptions matrix in the Inputs sheet was naturally transposed from a wide vertical key-value layout into a normalized entity table where each person is a single row with their respective parameters."
+}
+}

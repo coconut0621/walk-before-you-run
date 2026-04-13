@@ -1,0 +1,434 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Games",
+      "logical_name": "games",
+      "n_rows": 3000,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Game number",
+          "logical_name": "game_number",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique sequential identifier for each game in the dataset.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [1, 3000],
+            "higher_is_better": null,
+            "missing_value_meaning": "no game record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 3000,
+            "mean": 1500.5,
+            "median": 1500.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Data",
+        "anchor_text": "List of All Turns To Be Scored",
+        "block_id": "data.turns_table",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "D9:D6008"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Turns",
+      "logical_name": "turns",
+      "n_rows": 6000,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Turn number",
+          "logical_name": "turn_number",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique sequential identifier for each turn to be scored across all games.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [1, 6000],
+            "higher_is_better": null,
+            "missing_value_meaning": "no turn record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 6000,
+            "mean": 3000.5,
+            "median": 3000.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Game number",
+          "logical_name": "game_number",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Game identifier linking each turn to its parent game.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [1, 3000],
+            "higher_is_better": null,
+            "missing_value_meaning": "game not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 3000,
+            "mean": 1500.5,
+            "median": 1500.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Roll 1",
+          "logical_name": "roll_1",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Outcome of the first die rolled in the turn, a value from 1 to 6.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [1, 6],
+            "higher_is_better": null,
+            "missing_value_meaning": "roll not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 6,
+            "mean": 3.51,
+            "median": 4.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Roll 2",
+          "logical_name": "roll_2",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Outcome of the second die rolled in the turn, a value from 1 to 6.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [1, 6],
+            "higher_is_better": null,
+            "missing_value_meaning": "roll not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 6,
+            "mean": 3.51,
+            "median": 4.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Roll 3",
+          "logical_name": "roll_3",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Outcome of the third die rolled in the turn, a value from 1 to 6.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [1, 6],
+            "higher_is_better": null,
+            "missing_value_meaning": "roll not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 6,
+            "mean": 3.51,
+            "median": 4.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Roll 4",
+          "logical_name": "roll_4",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Outcome of the fourth die rolled in the turn, a value from 1 to 6.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [1, 6],
+            "higher_is_better": null,
+            "missing_value_meaning": "roll not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 6,
+            "mean": 3.51,
+            "median": 4.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Roll 5",
+          "logical_name": "roll_5",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Outcome of the fifth die rolled in the turn, a value from 1 to 6.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [1, 6],
+            "higher_is_better": null,
+            "missing_value_meaning": "roll not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 6,
+            "mean": 3.51,
+            "median": 4.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Roll 6",
+          "logical_name": "roll_6",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Outcome of the sixth die rolled in the turn, a value from 1 to 6.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [1, 6],
+            "higher_is_better": null,
+            "missing_value_meaning": "roll not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 6,
+            "mean": 3.52,
+            "median": 4.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Data",
+        "anchor_text": "List of All Turns To Be Scored",
+        "block_id": "data.turns_table",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "C8:J6008"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "FormattingLegend",
+      "logical_name": "formatting_legend",
+      "n_rows": 11,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Cell Type",
+          "logical_name": "cell_type",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Label describing the category of cell formatting used in the workbook (e.g. user assumption, calculation, label).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no cell type defined",
+            "allowed_categories": [
+              "User Variable Assumption (0 decimal places)",
+              "User Variable Assumption (2 decimal places)",
+              "User Variable Assumption (percentage)",
+              "User Variable Assumption (date)",
+              "Calculation (0 decimal places)",
+              "Calculation (negative, 0 decimal places)",
+              "Calculation (2 decimal places)",
+              "Calculation (percentage)",
+              "Cell to be populated by model author",
+              "Calculation (date)",
+              "Unique formula in row",
+              "Units label",
+              "Non Variable Assumption (0 decimal places)",
+              "Bold Label",
+              "Workings",
+              "Top Sheet header",
+              "Section header"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Example Value",
+          "logical_name": "example_value",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Representative example value or label illustrating how the cell type appears in the workbook.",
+            "unit": "",
+            "value_type": "other",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no example provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Formats",
+        "anchor_text": "Formatting Legend",
+        "block_id": "formats.formatting_legend",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "D13:I47"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": ["Game number"],
+      "child_key": ["Game number"]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "ModelOff 2016 Round 1 Section 3 dice rolling dataset. Contains 6,000 scored turns across 3,000 games, each turn recording six individual die outcomes (values 1-6). The Formats sheet provides the workbook's cell formatting legend.",
+    "n_tables": 3,
+    "notes": "Each game has exactly 2 turns. Turns are the primary fact table with six die-roll columns per row. The Games dimension is derived from the distinct game_number values in the Turns table. The FormattingLegend table documents workbook cell style conventions and is not part of the dice data model."
+  }
+}

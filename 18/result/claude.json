@@ -1,0 +1,376 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "property_parameters",
+      "logical_name": "property_investment_parameters",
+      "n_rows": 4,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "property_id",
+          "logical_name": "property_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Property identifier (Property 1 through Property 4).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no property",
+            "allowed_categories": ["Property 1", "Property 2", "Property 3", "Property 4"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "purchase_price",
+          "logical_name": "purchase_price_usd",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Purchase price of the property in USD at 31 December 2017.",
+            "unit": "$",
+            "value_type": "continuous",
+            "expected_range": [450000, 550000],
+            "higher_is_better": null,
+            "missing_value_meaning": "price not set",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 450000,
+            "max": 550000,
+            "mean": 492500.0,
+            "median": 485000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "investment_length_years",
+          "logical_name": "investment_length_years",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Investment holding period in years.",
+            "unit": "years",
+            "value_type": "continuous",
+            "expected_range": [4, 6.5],
+            "higher_is_better": null,
+            "missing_value_meaning": "length not set",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 4.0,
+            "max": 6.0,
+            "mean": 5.125,
+            "median": 5.25,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "terminal_value",
+          "logical_name": "terminal_value_usd",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Terminal (sale) value of the property in USD. Property 4 has two terminal values (4a before overhaul, 4b after overhaul).",
+            "unit": "$",
+            "value_type": "continuous",
+            "expected_range": [500000, 675000],
+            "higher_is_better": null,
+            "missing_value_meaning": "terminal value not set",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 500000,
+            "max": 675000,
+            "mean": 574000.0,
+            "median": 562500.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Purchase prices",
+        "block_id": "assumptions.property_parameters",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "D13:I42"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "revenue_assumptions",
+      "logical_name": "property_revenue_assumptions",
+      "n_rows": 5,
+      "profile": {
+        "density": 0.95
+      },
+      "columns": [
+        {
+          "physical_name": "revenue_stream_id",
+          "logical_name": "revenue_stream_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Revenue stream identifier (one per property, with Property 4 having a pre- and post-overhaul stream).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no stream",
+            "allowed_categories": ["Property 1", "Property 2", "Property 3", "Property 4", "Property 4 post overhaul"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "amount_per_annum",
+          "logical_name": "annual_revenue_usd",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Annual rental revenue amount in USD.",
+            "unit": "$",
+            "value_type": "continuous",
+            "expected_range": [45000, 75000],
+            "higher_is_better": null,
+            "missing_value_meaning": "no revenue",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 45000,
+            "max": 75000,
+            "mean": 58000.0,
+            "median": 55000.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "payments_per_year",
+          "logical_name": "payments_per_year",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of rent payment installments per year.",
+            "unit": "payments",
+            "value_type": "integer",
+            "expected_range": [1, 12],
+            "higher_is_better": null,
+            "missing_value_meaning": "payment frequency not set",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 4,
+            "max": 12,
+            "mean": 9.2,
+            "median": 12.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "indexation_rate",
+          "logical_name": "indexation_rate",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Annual revenue indexation (growth) rate as a decimal fraction.",
+            "unit": "%",
+            "value_type": "continuous",
+            "expected_range": [0.0, 0.03],
+            "higher_is_better": null,
+            "missing_value_meaning": "no indexation",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.0,
+            "max": 0.03,
+            "mean": 0.015,
+            "median": 0.02,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Revenues",
+        "block_id": "assumptions.revenue_assumptions",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "C48:I105"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "valuation_parameters",
+      "logical_name": "valuation_parameters",
+      "n_rows": 3,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "parameter_name",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the valuation parameter.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no parameter",
+            "allowed_categories": ["Valuation base date", "Discount rate", "Alternative discount rate"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Value of the valuation parameter (numeric rate or date).",
+            "unit": "mixed",
+            "value_type": "other",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Valuation",
+        "block_id": "assumptions.valuation_parameters",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "D109:I113"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": ["property_id"],
+      "child_key": ["revenue_stream_id"]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "ModelOff 2017 Round 1 Section 2 property investment model. Contains purchase prices, investment lengths, and terminal values for 4 properties purchased December 2017, revenue assumptions (annual amounts, payment frequencies, indexation), cost parameters, an overhaul event for Property 4, and discount rates for NPV valuation.",
+    "n_tables": 3,
+    "notes": "Monthly time series (81 periods starting Dec 2017) in the Calculations sheet contain formula-driven outputs. Property 4 has two terminal values and two revenue/cost profiles (pre/post overhaul)."
+  }
+}

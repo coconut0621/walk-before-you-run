@@ -1,0 +1,140 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "business_assumptions",
+      "logical_name": "financial_model_assumptions",
+      "n_rows": 22,
+      "profile": {
+        "density": 0.9
+      },
+      "columns": [
+        {
+          "physical_name": "section",
+          "logical_name": "section",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Logical section grouping for the assumption (e.g., Sales, COGS, Expenses).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no section",
+            "allowed_categories": ["Sales", "Cost of Goods Sold (COGS)", "Expenses", "Opening PPE", "New PPE", "Working Capital", "Debt", "Equity Injections", "Distributions", "Opening Assets"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "parameter_name",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the financial assumption parameter.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no parameter",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Unit of measurement for the parameter.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "dimensionless",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Numeric value of the assumption.",
+            "unit": "mixed",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no value set",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.065,
+            "max": 40000000.0,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Assumptions",
+        "block_id": "assumptions.financial_model_assumptions",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "C11:J58"
+      }
+    }
+  ],
+  "relations": [],
+  "dataset_summary": {
+    "plain_description": "ModelOff 2015 Round 1 Section 2 integrated financial model assumptions. Contains scalar input parameters for a multi-year business financial model covering sales growth, COGS ratios, expenses, PPE, working capital, debt, equity, and opening balance sheet values.",
+    "n_tables": 1,
+    "notes": "The Workings sheet contains formula-driven period calculations (P&L, Balance Sheet, Cash Flow) referencing these assumptions. Only the assumption parameters contain raw input data; calculation outputs are derived."
+  }
+}

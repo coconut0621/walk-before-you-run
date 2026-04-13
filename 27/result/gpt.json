@@ -1,0 +1,1008 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "AssumptionParameters",
+      "logical_name": "assumption_parameters",
+      "n_rows": 27,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "AssumptionID",
+          "logical_name": "assumption_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each assumption input row derived from the Assumptions sheet.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              27
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no assumption row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 27,
+            "mean": 14.0,
+            "median": 14.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Section",
+          "logical_name": "assumption_section",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Section header grouping the assumption row in the model input sheet.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "section label not present",
+            "allowed_categories": [
+              "Sales",
+              "Cost of Goods Sold (COGS)",
+              "Expenses",
+              "Opening PPE",
+              "New PPE",
+              "Working Capital",
+              "Debt",
+              "Equity Injections",
+              "Distributions",
+              "Opening Assets"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Assumption",
+          "logical_name": "assumption_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Assumption label shown on the input row.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption label missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Units",
+          "logical_name": "unit_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Workbook unit label associated with the assumption value.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit not stated",
+            "allowed_categories": [
+              "[$]",
+              "[$ p.a.]",
+              "[% p.a.]",
+              "[%]",
+              "[years]",
+              "[end of year #]",
+              "[% of sales]",
+              "[% of COGS]",
+              "[% of expenses]"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "assumption_value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric assumption value entered or directly referenced by the workbook for the given assumption row.",
+            "unit": "mixed; see Units",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "not populated or formula not evaluated",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 40000000,
+            "mean": 6944445.38462963,
+            "median": 10.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Assumptions",
+        "block_id": "assumptions.input_parameters",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "C13:J58"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Periods",
+      "logical_name": "periods",
+      "n_rows": 11,
+      "profile": {
+        "density": 0.9696969697
+      },
+      "columns": [
+        {
+          "physical_name": "Year Number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Model year index used across the workings output tables.",
+            "unit": "year",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              10
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no period defined",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 10,
+            "mean": 5.0,
+            "median": 5.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Period Start",
+          "logical_name": "period_start_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Start date of the model period; the opening year 0 has no explicit start date in the workbook.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "opening period has no explicit start date",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Period End",
+          "logical_name": "period_end_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "End date of the model period from the workings header.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period end date missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Workings",
+        "anchor_text": "Period Start",
+        "block_id": "workings.period_header",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "E6:W8"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "ProfitLossLineItems",
+      "logical_name": "profit_loss_line_items",
+      "n_rows": 9,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "PLLineItemID",
+          "logical_name": "profit_loss_line_item_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each profit and loss line item.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              9
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 9,
+            "mean": 5.0,
+            "median": 5.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Line Item",
+          "logical_name": "line_item_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Displayed profit and loss row label.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item label missing",
+            "allowed_categories": [
+              "Sales",
+              "Cost of Goods Sold",
+              "Expenses",
+              "EBITDA",
+              "Depreciation",
+              "Interest Expense",
+              "Net Profit",
+              "Distributions",
+              "To Retained Earnings"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Display Order",
+          "logical_name": "display_order",
+          "dtype": "integer",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Top-to-bottom order of the line item within the profit and loss section.",
+            "unit": "position",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              9
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "display order missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 9,
+            "mean": 5.0,
+            "median": 5.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Units",
+          "logical_name": "unit_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit label shown for the profit and loss rows.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit not stated",
+            "allowed_categories": [
+              "[$]"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Workings",
+        "anchor_text": "Profit and Loss",
+        "block_id": "workings.profit_loss_rows",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "C11:H28"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "ProfitLossAmounts",
+      "logical_name": "profit_loss_amounts",
+      "n_rows": 90,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "PLAmountID",
+          "logical_name": "profit_loss_amount_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each profit and loss amount record.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              90
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no fact row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 90,
+            "mean": 45.5,
+            "median": 45.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Year Number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Year number identifying the model period for the profit and loss amount.",
+            "unit": "year",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              10
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 10,
+            "mean": 5.5,
+            "median": 5.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PLLineItemID",
+          "logical_name": "profit_loss_line_item_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Foreign key to the profit and loss line item dimension.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              9
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "line item not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 9,
+            "mean": 5.0,
+            "median": 5.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Amount",
+          "logical_name": "amount",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Profit and loss amount for the given line item and model year.",
+            "unit": "$",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "amount missing for this line item and year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Workings",
+        "anchor_text": "Profit and Loss",
+        "block_id": "workings.profit_loss_values",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "D14:W28"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "BalanceSheetLineItems",
+      "logical_name": "balance_sheet_line_items",
+      "n_rows": 12,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "BSLineItemID",
+          "logical_name": "balance_sheet_line_item_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each balance sheet line item.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 12,
+            "mean": 6.5,
+            "median": 6.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Section",
+          "logical_name": "balance_sheet_section",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Displayed subsection grouping for the balance sheet row.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "section label missing",
+            "allowed_categories": [
+              "Assets",
+              "Liabilities",
+              "Summary",
+              "Equity"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Line Item",
+          "logical_name": "line_item_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Displayed balance sheet row label.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item label missing",
+            "allowed_categories": [
+              "Cash",
+              "Receivables",
+              "Inventory",
+              "PPE",
+              "Total Assets",
+              "Payables",
+              "Debt",
+              "Total Liabilities",
+              "NET ASSETS",
+              "Shareholder Capital",
+              "Retained Earnings",
+              "Total Equity"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Display Order",
+          "logical_name": "display_order",
+          "dtype": "integer",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Top-to-bottom order of the line item within the balance sheet block.",
+            "unit": "position",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "display order missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 12,
+            "mean": 6.5,
+            "median": 6.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Units",
+          "logical_name": "unit_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit label shown for the balance sheet rows.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit not stated",
+            "allowed_categories": [
+              "[$]"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Workings",
+        "anchor_text": "Balance Sheet",
+        "block_id": "workings.balance_sheet_rows",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "C31:H50"
+      }
+    },
+    {
+      "table_id": "T6",
+      "physical_name": "BalanceSheetAmounts",
+      "logical_name": "balance_sheet_amounts",
+      "n_rows": 132,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "BSAmountID",
+          "logical_name": "balance_sheet_amount_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each balance sheet amount record.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              132
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no fact row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 132,
+            "mean": 66.5,
+            "median": 66.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Year Number",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Year number identifying the model period for the balance sheet amount.",
+            "unit": "year",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              10
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "period not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 10,
+            "mean": 5.0,
+            "median": 5.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "BSLineItemID",
+          "logical_name": "balance_sheet_line_item_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Foreign key to the balance sheet line item dimension.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              12
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "line item not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 12,
+            "mean": 6.5,
+            "median": 6.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Amount",
+          "logical_name": "amount",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Balance sheet amount for the given line item and model year.",
+            "unit": "$",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "amount missing for this line item and year",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 0,
+            "mean": 0.0,
+            "median": 0.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Workings",
+        "anchor_text": "Balance Sheet",
+        "block_id": "workings.balance_sheet_values",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "D34:W50"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T2",
+      "child_table_id": "T4",
+      "parent_key": [
+        "Year Number"
+      ],
+      "child_key": [
+        "Year Number"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T3",
+      "child_table_id": "T4",
+      "parent_key": [
+        "PLLineItemID"
+      ],
+      "child_key": [
+        "PLLineItemID"
+      ]
+    },
+    {
+      "relation_id": "R3",
+      "parent_table_id": "T2",
+      "child_table_id": "T6",
+      "parent_key": [
+        "Year Number"
+      ],
+      "child_key": [
+        "Year Number"
+      ]
+    },
+    {
+      "relation_id": "R4",
+      "parent_table_id": "T5",
+      "child_table_id": "T6",
+      "parent_key": [
+        "BSLineItemID"
+      ],
+      "child_key": [
+        "BSLineItemID"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Financial model input assumptions together with normalized annual profit and loss and balance sheet workings for ModelOff 2015 Round 1 Section 2.",
+    "n_tables": 6,
+    "notes": "The Assumptions sheet was normalized into one parameter table. The Workings sheet period header was converted into a period dimension, and the wide Profit and Loss and Balance Sheet blocks were unpivoted into long fact tables with separate line-item dimensions. Simple direct-reference and sum formulas were interpreted where needed to complete obvious derived values."
+  }
+}

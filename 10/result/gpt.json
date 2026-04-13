@@ -1,0 +1,687 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Teams",
+      "logical_name": "teams",
+      "n_rows": 20,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "ID",
+          "logical_name": "team_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Workbook-assigned identifier for each team.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              20
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no team record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 20,
+            "mean": 10.5,
+            "median": 10.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Name",
+          "logical_name": "team_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Canonical team name used throughout the workbook.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "team name not recorded",
+            "allowed_categories": [
+              "Adrianople",
+              "Ani",
+              "Antioch",
+              "Bari",
+              "Chalcedon",
+              "Cherson",
+              "Constantinople",
+              "Dyrrachium",
+              "Edessa",
+              "Iconium",
+              "Kars",
+              "Naissus",
+              "Nicaea",
+              "Nicomedia",
+              "Ohrid",
+              "Prilep",
+              "Samosata",
+              "Sardica",
+              "Trebizond",
+              "Varna"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Check_Sum",
+        "anchor_text": "List of Teams",
+        "block_id": "check_sum.list_of_teams",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "A1:B22"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Team_Stop_Times",
+      "logical_name": "team_stop_times",
+      "n_rows": 20,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Team_ID",
+          "logical_name": "team_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Team identifier matching the Teams table.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              20
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "team not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 20,
+            "mean": 10.5,
+            "median": 10.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Stop Time",
+          "logical_name": "stop_time",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Stop time value listed for the team in Q16.",
+            "unit": "minutes",
+            "value_type": "integer",
+            "expected_range": [
+              30,
+              76
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "stop time not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 30,
+            "max": 76,
+            "mean": 49.75,
+            "median": 50.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Q16",
+        "anchor_text": "List of Stop Times",
+        "block_id": "q16.list_of_stop_times",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "A1:C22"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "Team_Primes",
+      "logical_name": "team_primes",
+      "n_rows": 20,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Team_ID",
+          "logical_name": "team_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Team identifier matching the Teams table.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              20
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "team not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 20,
+            "mean": 10.5,
+            "median": 10.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Primes",
+          "logical_name": "team_prime",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Prime number assigned to each team for checksum calculations.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              2,
+              71
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "prime not assigned",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2,
+            "max": 71,
+            "mean": 31.95,
+            "median": 30.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Check_Sum",
+        "anchor_text": "Primes",
+        "block_id": "check_sum.team_primes",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "A1:H22"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "Matches",
+      "logical_name": "matches",
+      "n_rows": 380,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Match_ID",
+          "logical_name": "match_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Derived sequential identifier for each match row in the Data sheet.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              380
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no match record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 380,
+            "mean": 190.5,
+            "median": 190.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Date",
+          "logical_name": "match_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Calendar date of the match.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "match date missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYYMMDD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Round",
+          "logical_name": "round_number",
+          "dtype": "integer",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Round number within the season schedule.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              38
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "round not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 38,
+            "mean": 19.5,
+            "median": 19.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Team_H_ID",
+          "logical_name": "home_team_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Identifier of the home team, mapped from Team_H.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              20
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "home team not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 20,
+            "mean": 10.5,
+            "median": 10.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Team_A_ID",
+          "logical_name": "away_team_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Identifier of the away team, mapped from Team_A.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              20
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "away team not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 20,
+            "mean": 10.5,
+            "median": 10.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Score_H",
+          "logical_name": "home_score",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Goals scored by the home team in the match.",
+            "unit": "goals",
+            "value_type": "integer",
+            "expected_range": null,
+            "higher_is_better": true,
+            "missing_value_meaning": "home score missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Score_A",
+          "logical_name": "away_score",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Goals scored by the away team in the match.",
+            "unit": "goals",
+            "value_type": "integer",
+            "expected_range": null,
+            "higher_is_better": true,
+            "missing_value_meaning": "away score missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Time_HG",
+          "logical_name": "home_goal_times_text",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Comma-separated goal times for the home team; source asterisks are preserved.",
+            "unit": "minutes",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "'---' indicates no home goals recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Time_AG",
+          "logical_name": "away_goal_times_text",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Comma-separated goal times for the away team; source asterisks are preserved.",
+            "unit": "minutes",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "'---' indicates no away goals recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Player_HG",
+          "logical_name": "home_scorer_player_ids_text",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Comma-separated home-team scorer player numbers aligned positionally to Time_HG.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "'---' indicates no home scorers recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Player_AG",
+          "logical_name": "away_scorer_player_ids_text",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Comma-separated away-team scorer player numbers aligned positionally to Time_AG.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "'---' indicates no away scorers recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Data",
+        "anchor_text": "Date",
+        "block_id": "data.match_results",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "A1:J381"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": [
+        "ID"
+      ],
+      "child_key": [
+        "Team_ID"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T1",
+      "child_table_id": "T3",
+      "parent_key": [
+        "ID"
+      ],
+      "child_key": [
+        "Team_ID"
+      ]
+    },
+    {
+      "relation_id": "R3",
+      "parent_table_id": "T1",
+      "child_table_id": "T4",
+      "parent_key": [
+        "ID"
+      ],
+      "child_key": [
+        "Team_H_ID"
+      ]
+    },
+    {
+      "relation_id": "R4",
+      "parent_table_id": "T1",
+      "child_table_id": "T4",
+      "parent_key": [
+        "ID"
+      ],
+      "child_key": [
+        "Team_A_ID"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Soccer season workbook with 20 teams, 380 match results, and supplemental team-level stop-time and checksum-prime assignments.",
+    "n_tables": 4,
+    "notes": "Teams is the master dimension. Matches contains one row per fixture with home/away team IDs plus raw scorer-time and scorer-player lists preserved as source strings. Q16 provides team stop times. Check_Sum provides the canonical team list and prime values used for checksum calculations."
+  }
+}

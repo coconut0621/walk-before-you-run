@@ -1,0 +1,279 @@
+{
+  "dataset_summary": {
+    "dataset_name": "Roll The Dice",
+    "description": "A normalized relational schema representing a sequence of dice game turns and individual dice rolls, extracted from a wide matrix representation.",
+    "n_tables": 3
+  },
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Games",
+      "logical_name": "games",
+      "n_rows": 2977,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Game number",
+          "logical_name": "game_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique identifier for each game played.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": "[1, 2977]",
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 2977,
+            "mean": 1489.0,
+            "median": 1489.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Data",
+        "anchor_text": "List of All Turns To Be Scored",
+        "block_id": "data.games_dimension",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "B10:B5963"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Turns",
+      "logical_name": "turns",
+      "n_rows": 5954,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Turn number",
+          "logical_name": "turn_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique identifier for each turn taken across all games.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": "[1, 5954]",
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 5954,
+            "mean": 2977.5,
+            "median": 2977.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Game number",
+          "logical_name": "game_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Identifier of the game this turn belongs to.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": "[1, 2977]",
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 2977,
+            "mean": 1489.0,
+            "median": 1489.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Data",
+        "anchor_text": "List of All Turns To Be Scored",
+        "block_id": "data.turns_list",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "A9:B5963"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "Turn_Rolls",
+      "logical_name": "turn_rolls",
+      "n_rows": 35724,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Turn number",
+          "logical_name": "turn_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Identifier of the turn during which the roll occurred.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": "[1, 5954]",
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 5954,
+            "mean": 2977.5,
+            "median": 2977.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Roll_Index",
+          "logical_name": "die_index",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The sequential index of the die rolled during the turn.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": "[1, 6]",
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 6,
+            "mean": 3.5,
+            "median": 3.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Roll_Value",
+          "logical_name": "face_value",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The face value shown on the rolled die.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": "[1, 6]",
+            "higher_is_better": true,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 6,
+            "mean": 3.5,
+            "median": 3.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Data",
+        "anchor_text": "List of All Turns To Be Scored",
+        "block_id": "data.rolls_matrix",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "A9:H5963"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": [
+        "Game number"
+      ],
+      "child_key": [
+        "Game number"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T2",
+      "child_table_id": "T3",
+      "parent_key": [
+        "Turn number"
+      ],
+      "child_key": [
+        "Turn number"
+      ]
+    }
+  ]
+}

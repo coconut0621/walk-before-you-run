@@ -1,0 +1,411 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Investor",
+      "logical_name": "investor",
+      "n_rows": 4,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "investor_name",
+          "logical_name": "investor_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "First name of the savings account holder. Acts as the unique identifier for each investor.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no investor record",
+            "allowed_categories": ["Alice", "Bob", "Charlie", "Diana"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "Assumptions",
+        "block_id": "inputs.investor_assumptions_matrix",
+        "extraction_kind": "distinct_values_from_repeated_field",
+        "cell_region": "E13:H13"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "InvestorAssumption",
+      "logical_name": "investor_assumption",
+      "n_rows": 28,
+      "profile": {
+        "density": 0.89
+      },
+      "columns": [
+        {
+          "physical_name": "investor_name",
+          "logical_name": "investor_name",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the investor this assumption row applies to. Foreign key to the Investor table.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "investor not linked",
+            "allowed_categories": ["Alice", "Bob", "Charlie", "Diana"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "assumption_name",
+          "logical_name": "assumption_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Label identifying which assumption this row records, drawn from the row headers in the workbook.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption not specified",
+            "allowed_categories": [
+              "Initial Account Deposit at 31 Dec 2016 ($)",
+              "Annual Salary in 2017 ($)",
+              "Growth in annual salary each 1 January (beginning in 2018 unless noted)",
+              "Core Deposits into Savings Account (beginning in 2017)",
+              "Additional Deposits into Savings Account",
+              "Date the Account is Withdrawn and Closed",
+              "Forecasted Investment Returns"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "assumption_value_text",
+          "logical_name": "assumption_value_text",
+          "dtype": "string",
+          "role": "free_text",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Raw text or numeric representation of the assumption value. Many cells contain complex narrative rules (e.g. tiered salary growth rates, conditional deposit schedules) that cannot be reduced to a single numeric field.",
+            "unit": "varies by assumption",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no additional deposit applicable for this investor",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 0.9,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "General inputs",
+        "block_id": "inputs.investor_assumptions_matrix",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "D12:H19"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "InvestorNumericAssumption",
+      "logical_name": "investor_numeric_assumption",
+      "n_rows": 8,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "investor_name",
+          "logical_name": "investor_name",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the investor. Foreign key to the Investor table.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "investor not linked",
+            "allowed_categories": ["Alice", "Bob", "Charlie", "Diana"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "initial_deposit_usd",
+          "logical_name": "initial_deposit_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Initial account deposit balance at 31 December 2016, in US dollars.",
+            "unit": "USD",
+            "value_type": "continuous",
+            "expected_range": [0, null],
+            "higher_is_better": null,
+            "missing_value_meaning": "no initial deposit",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 40000,
+            "mean": 14705.0,
+            "median": 8910.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "annual_salary_2017_usd",
+          "logical_name": "annual_salary_2017_usd",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Annual gross salary for the investor in 2017, in US dollars. Salary in subsequent years is derived by applying the growth assumption.",
+            "unit": "USD",
+            "value_type": "continuous",
+            "expected_range": [0, null],
+            "higher_is_better": null,
+            "missing_value_meaning": "salary not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 35698,
+            "max": 95000,
+            "mean": 60549.5,
+            "median": 55750.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "account_close_date",
+          "logical_name": "account_close_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Date on which the savings account is withdrawn and closed for the investor.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "account close date not specified",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Inputs",
+        "anchor_text": "General inputs",
+        "block_id": "inputs.investor_assumptions_matrix",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "D12:H19"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "FormattingLegend",
+      "logical_name": "formatting_legend",
+      "n_rows": 13,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "format_label",
+          "logical_name": "format_label",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Human-readable name of the cell formatting style used in the workbook (e.g. 'User Variable Assumption (0 decimal places)', 'Calculation (percentage)').",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no format defined",
+            "allowed_categories": [
+              "User Variable Assumption (0 decimal places)",
+              "User Variable Assumption (2 decimal places)",
+              "User Variable Assumption (percentage)",
+              "User Variable Assumption (date)",
+              "Calculation (0 decimal places)",
+              "Calculation (negative, 0 decimal places)",
+              "Calculation (2 decimal places)",
+              "Calculation (percentage)",
+              "Cell to be populated by model author",
+              "Calculation (date)",
+              "Unique formula in row",
+              "Units label",
+              "Non Variable Assumption (0 decimal places)",
+              "Bold Label",
+              "Workings",
+              "Top Sheet header",
+              "Section header"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "example_value",
+          "logical_name": "example_value",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Representative example value demonstrating how a cell of this format type appears in the workbook (may be numeric, date, text, or a color/font description).",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no example provided",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 0.8,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Formats",
+        "anchor_text": "Formatting Legend",
+        "block_id": "formats.formatting_legend",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "D10:I47"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": ["investor_name"],
+      "child_key": ["investor_name"]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T1",
+      "child_table_id": "T3",
+      "parent_key": ["investor_name"],
+      "child_key": ["investor_name"]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "ModelOff 2016 Round 2 Section 2 'Fund the Future' competition problem. The workbook defines savings account projection assumptions for four investors (Alice, Bob, Charlie, Diana), each with an initial deposit, annual salary, salary growth rule, core deposit schedule, optional additional deposits, account close date, and investment return rule. A Formats sheet provides the workbook's cell-formatting legend. The logical schema normalizes the wide investor-by-assumption matrix into a dimension table (Investor), a long fact table of all assumptions (InvestorAssumption), a structured numeric/date sub-table (InvestorNumericAssumption), and a parameter table for the formatting legend (FormattingLegend).",
+    "n_tables": 4,
+    "notes": "T2 (InvestorAssumption) is the canonical long fact table derived from the wide D12:H19 matrix. T3 (InvestorNumericAssumption) surfaces only the two cleanly numeric columns (initial deposit, 2017 salary) and the single date column (account close date) that can be parsed unambiguously; the remaining assumption fields (salary growth rule, deposit schedule, investment return rule) are complex narrative strings retained in T2. T4 (FormattingLegend) captures the Formats sheet key-value legend which documents the visual conventions used throughout the workbook. Alice has no additional deposit; Bob has a one-off lump sum; Charlie and Diana have recurring deposit schedules. Investment return compounding frequencies differ across investors (annual vs. quarterly)."
+  }
+}

@@ -1,0 +1,442 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "depot_scenario_vehicles",
+      "logical_name": "depot_scenario_vehicles",
+      "n_rows": 36,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "scenario_id",
+          "logical_name": "scenario_id",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Scenario identifier (1a, 1b, 2a, 2b).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no scenario",
+            "allowed_categories": ["Scenario 1a", "Scenario 1b", "Scenario 2a", "Scenario 2b"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "depot",
+          "logical_name": "depot",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Depot identifier (A through I).",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no depot",
+            "allowed_categories": ["Depot A", "Depot B", "Depot C", "Depot D", "Depot E", "Depot F", "Depot G", "Depot H", "Depot I"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "vehicles_for_service",
+          "logical_name": "vehicles_for_service",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of vehicles assigned for service at this depot under this scenario.",
+            "unit": "vehicles",
+            "value_type": "integer",
+            "expected_range": [88, 2438],
+            "higher_is_better": null,
+            "missing_value_meaning": "no vehicles",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 88,
+            "max": 2438,
+            "mean": 578.0,
+            "median": 519.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.083,
+              "n_outliers": 3,
+              "top_1_outlier": 2438
+            }
+          }
+        },
+        {
+          "physical_name": "hub_allocation",
+          "logical_name": "hub_allocation",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Hub (1, 2, or 3) to which this depot is assigned under this scenario.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no allocation",
+            "allowed_categories": ["Hub 1", "Hub 2", "Hub 3"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Vehicles for service and hub groupings",
+        "block_id": "assumptions.scenario_depot_inputs",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "D13:P24"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "depot_capacity",
+      "logical_name": "depot_capacity",
+      "n_rows": 9,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "depot",
+          "logical_name": "depot",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Depot identifier.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no depot",
+            "allowed_categories": ["Depot A", "Depot B", "Depot C", "Depot D", "Depot E", "Depot F", "Depot G", "Depot H", "Depot I"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "total_capacity",
+          "logical_name": "total_capacity_vehicles",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Maximum number of vehicles that this depot can accommodate.",
+            "unit": "vehicles",
+            "value_type": "integer",
+            "expected_range": [100, 2700],
+            "higher_is_better": null,
+            "missing_value_meaning": "no capacity data",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 100,
+            "max": 2700,
+            "mean": 700.0,
+            "median": 400.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.111,
+              "n_outliers": 1,
+              "top_1_outlier": 2700
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Depot capacity",
+        "block_id": "assumptions.depot_capacity",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "C26:P27"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "depot_distances",
+      "logical_name": "depot_pairwise_distances",
+      "n_rows": 36,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "depot_from",
+          "logical_name": "depot_from",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Origin depot in the depot pair.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no depot",
+            "allowed_categories": ["Depot A", "Depot B", "Depot C", "Depot D", "Depot E", "Depot F", "Depot G", "Depot H", "Depot I"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "depot_to",
+          "logical_name": "depot_to",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Destination depot in the depot pair.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no depot",
+            "allowed_categories": ["Depot A", "Depot B", "Depot C", "Depot D", "Depot E", "Depot F", "Depot G", "Depot H", "Depot I"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "distance_miles",
+          "logical_name": "distance_miles",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Driving distance between the two depots in miles.",
+            "unit": "miles",
+            "value_type": "continuous",
+            "expected_range": [285, 1150],
+            "higher_is_better": null,
+            "missing_value_meaning": "no route",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 285.0,
+            "max": 1150.65,
+            "mean": 668.0,
+            "median": 619.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Driving distance between each pair of depots (one-way)",
+        "block_id": "assumptions.depot_distances",
+        "extraction_kind": "lower_triangle_matrix_to_edge_table",
+        "cell_region": "E33:P41"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "revenue_cost_parameters",
+      "logical_name": "revenue_cost_parameters",
+      "n_rows": 3,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "parameter_name",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the revenue or cost assumption parameter.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no parameter",
+            "allowed_categories": ["Revenue per vehicle", "Penalty for unserviced vehicle", "Transport costs"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "other",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit of the parameter value.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "dimensionless",
+            "allowed_categories": ["$ per vehicle", "$ per mile"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric value of the parameter.",
+            "unit": "mixed",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no value",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -500.0,
+            "max": 2000.0,
+            "mean": 633.47,
+            "median": 1.4,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Other revenue and cost assumptions",
+        "block_id": "assumptions.revenue_cost_params",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "D47:H49"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T2",
+      "child_table_id": "T1",
+      "parent_key": ["depot"],
+      "child_key": ["depot"]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "ModelOff 2017 Round 2 Section 3 vehicle system allocation workbook. Contains four scenarios of vehicle-to-depot assignments and hub allocations, depot capacities, pairwise driving distances between 9 depots, and revenue/cost parameters.",
+    "n_tables": 4,
+    "notes": "The depot_scenario_vehicles table is normalized from a wide matrix (scenarios x depots). The depot_distances table is derived from a lower-triangle distance matrix."
+  }
+}

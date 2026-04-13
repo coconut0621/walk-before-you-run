@@ -1,0 +1,690 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Assumptions",
+      "logical_name": "assumptions",
+      "n_rows": 27,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "AssumptionID",
+          "logical_name": "assumption_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each model assumption row.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              27
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no assumption row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 27,
+            "mean": 14,
+            "median": 14,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Section",
+          "logical_name": "section",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Business section grouping related model assumptions.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption section missing",
+            "allowed_categories": [
+              "Sales",
+              "Cost of Goods Sold (COGS)",
+              "Expenses",
+              "Opening PPE",
+              "New PPE",
+              "Working Capital",
+              "Debt",
+              "Equity Injections",
+              "Distributions",
+              "Opening Assets"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Parameter",
+          "logical_name": "parameter",
+          "dtype": "string",
+          "role": "free_text",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Name of the specific assumption within a section.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "parameter name missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit attached to the assumption value, such as dollars, percent per annum, or years.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit not specified",
+            "allowed_categories": [
+              "[$]",
+              "[$ p.a.]",
+              "[% p.a.]",
+              "[%]",
+              "[years]",
+              "[end of year #]",
+              "[% of sales]",
+              "[% of COGS]",
+              "[% of expenses]"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric assumption value; interpretation depends on the associated Unit field.",
+            "unit": "",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "assumption value missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 40000000,
+            "mean": 6944445.38463,
+            "median": 10,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.4815,
+              "n_outliers": 13,
+              "top_1_outlier": 40000000.0
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Sales",
+        "block_id": "assumptions.model_assumptions",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "C13:J58"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Periods",
+      "logical_name": "periods",
+      "n_rows": 11,
+      "profile": {
+        "density": 0.9773
+      },
+      "columns": [
+        {
+          "physical_name": "PeriodID",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each projection period derived from the Workings sheet timeline.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              11
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no period row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 11,
+            "mean": 6,
+            "median": 6,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "YearNumber",
+          "logical_name": "year_number",
+          "dtype": "integer",
+          "role": "id",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Model year index, where 0 is the opening balance date and 1-10 are projected years.",
+            "unit": "years",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              10
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "year index missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 10,
+            "mean": 5,
+            "median": 5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PeriodStart",
+          "logical_name": "period_start",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Inclusive start date of the projection period; null for the opening balance period (Year 0).",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "not applicable for opening balance period",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "PeriodEnd",
+          "logical_name": "period_end",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "End date of the projection period.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period end date missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Workings",
+        "anchor_text": "Period Start",
+        "block_id": "workings.period_timeline",
+        "extraction_kind": "header_calendar_to_dimension_table",
+        "cell_region": "E6:W8"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "Line_Items",
+      "logical_name": "line_items",
+      "n_rows": 21,
+      "profile": {
+        "density": 0.9143
+      },
+      "columns": [
+        {
+          "physical_name": "LineItemID",
+          "logical_name": "line_item_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each modeled financial statement line item.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              21
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no line item row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 21,
+            "mean": 11,
+            "median": 11,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "StatementSection",
+          "logical_name": "statement_section",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Top-level financial statement grouping for the line item.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "statement section missing",
+            "allowed_categories": [
+              "Profit and Loss",
+              "Balance Sheet"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Subsection",
+          "logical_name": "subsection",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Nested balance-sheet grouping; null for Profit and Loss rows.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "not applicable for profit and loss rows",
+            "allowed_categories": [
+              "Assets",
+              "Equity",
+              "Liabilities"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "LineItem",
+          "logical_name": "line_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Business label of the modeled statement line.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item label missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Unit",
+          "logical_name": "unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit shown for the line item on the Workings sheet.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit missing",
+            "allowed_categories": [
+              "[$]"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Workings",
+        "anchor_text": "Profit and Loss",
+        "block_id": "workings.line_items",
+        "extraction_kind": "row_label_hierarchy_to_dimension_table",
+        "cell_region": "C11:H50"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "Statement_Values",
+      "logical_name": "statement_values",
+      "n_rows": 222,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "ValueID",
+          "logical_name": "value_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for each observed line-item-by-period value.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              222
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no value row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 222,
+            "mean": 111.5,
+            "median": 111.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "LineItemID",
+          "logical_name": "line_item_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Foreign key linking the value to the corresponding financial statement line item.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "line item link missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 21,
+            "mean": 11.243243,
+            "median": 11,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PeriodID",
+          "logical_name": "period_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Foreign key linking the value to the corresponding projection period.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period link missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 11,
+            "mean": 6.202703,
+            "median": 6,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Amount",
+          "logical_name": "amount",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric cell value from the Workings sheet after normalizing the wide year layout into long form.",
+            "unit": "$",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "cell was blank in the source template",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Workings",
+        "anchor_text": "Profit and Loss",
+        "block_id": "workings.statement_values",
+        "extraction_kind": "wide_cross_tab_to_long_fact_table",
+        "cell_region": "D14:W50"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T3",
+      "child_table_id": "T4",
+      "parent_key": [
+        "LineItemID"
+      ],
+      "child_key": [
+        "LineItemID"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T2",
+      "child_table_id": "T4",
+      "parent_key": [
+        "PeriodID"
+      ],
+      "child_key": [
+        "PeriodID"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "ModelOff 2015 Round 1 Section 2 'Bread and Butter' workbook containing business assumptions plus a normalized 10-year financial-model structure with projection periods, statement line items, and line-item-by-period values.",
+    "n_tables": 4,
+    "notes": "The Formats sheet is excluded because it is a formatting legend rather than a logical data entity. Assumptions stores one row per business driver. The Workings sheet is normalized into Periods, Line_Items, and Statement_Values; profit-and-loss rows have no Year 0 amount in the source template, so those opening-balance blanks are omitted from Statement_Values."
+  }
+}

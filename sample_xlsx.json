@@ -1,0 +1,248 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Patients",
+      "logical_name": "patients",
+      "n_rows": 1200,
+      "profile": {
+        "density": 0.97
+      },
+      "columns": [
+        {
+          "physical_name": "PID",
+          "logical_name": "patient_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique identifier for each patient in the cohort.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no patient record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 1200,
+            "mean": 600.5,
+            "median": 600.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Age_yrs",
+          "logical_name": "age_years",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Age of the patient at baseline, in years.",
+            "unit": "years",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              120
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "age not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 120,
+            "mean": 55.2,
+            "median": 54.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.01,
+              "n_outliers": 12,
+              "top_1_outlier": 120
+            }
+          }
+        },
+        {
+          "physical_name": "Sex",
+          "logical_name": "sex",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Recorded sex of the patient.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "sex not reported",
+            "allowed_categories": [
+              "M",
+              "F"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Vehicles for service and hub groupings",
+        "block_id": "assumptions.scenario_depot_inputs",
+        "extraction_kind": "paired_rows_wide_to_long_fact_table",
+        "cell_region": "H13:P24"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "Visits",
+      "logical_name": "visits",
+      "n_rows": 3500,
+      "profile": {
+        "density": 0.95
+      },
+      "columns": [
+        {
+          "physical_name": "VisitID",
+          "logical_name": "visit_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique identifier for each clinic visit.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no visit record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 101,
+            "max": 3600,
+            "mean": 1850.0,
+            "median": 1850.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "PID",
+          "logical_name": "patient_id",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Patient identifier linking each visit to the Patients table.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "patient not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 1200,
+            "mean": 600.0,
+            "median": 600.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "VisitDate",
+          "logical_name": "visit_date",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Calendar date when the visit took place.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "visit date missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Vehicles for service and hub groupings",
+        "block_id": "assumptions.scenario_depot_inputs",
+        "extraction_kind": "paired_rows_wide_to_long_fact_table",
+        "cell_region": "H13:P24"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": [
+        "PID"
+      ],
+      "child_key": [
+        "PID"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Baseline patient cohort with repeated clinic visits.",
+    "n_tables": 2,
+    "notes": "Patients contains one row per patient; Visits contains one row per visit, linked by PID."
+  }
+}

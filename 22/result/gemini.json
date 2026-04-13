@@ -1,0 +1,359 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Time_Periods",
+      "logical_name": "time_periods",
+      "n_rows": 17,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Quarter Number",
+          "logical_name": "quarter_number",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for the financial quarter.",
+            "unit": "quarter",
+            "value_type": "integer",
+            "expected_range": "[0, 16]",
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 16,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Period Start",
+          "logical_name": "period_start",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The starting date of the quarter.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Period End",
+          "logical_name": "period_end",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The ending date of the quarter.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Quarter Number",
+        "block_id": "assumptions.time_periods",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "D5:V7"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "House_Sales",
+      "logical_name": "house_sales",
+      "n_rows": 68,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Category",
+          "logical_name": "house_category",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The category of the house sold (Category A, B, C, D).",
+            "unit": null,
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": ["Category A", "Category B", "Category C", "Category D"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Quarter Number",
+          "logical_name": "quarter_number",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for the financial quarter.",
+            "unit": "quarter",
+            "value_type": "id",
+            "expected_range": "[0, 16]",
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 16,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Houses Sold",
+          "logical_name": "houses_sold",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of houses sold in the given category and quarter.",
+            "unit": "# houses",
+            "value_type": "integer",
+            "expected_range": null,
+            "higher_is_better": true,
+            "missing_value_meaning": "0 sales assumed",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 160,
+            "mean": 25.4,
+            "median": 0.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.05,
+              "n_outliers": 3,
+              "top_1_outlier": 160
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "House sales",
+        "block_id": "assumptions.house_sales",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C10:V14"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "Non_Construction_Costs",
+      "logical_name": "non_construction_costs",
+      "n_rows": 51,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Cost Type",
+          "logical_name": "cost_type",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The category of cost incurred (e.g., Land purchase, Earthworks).",
+            "unit": null,
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": ["Land purchase", "Earthworks", "Pre-construction costs"]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Quarter Number",
+          "logical_name": "quarter_number",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sequential identifier for the financial quarter.",
+            "unit": "quarter",
+            "value_type": "id",
+            "expected_range": "[0, 16]",
+            "higher_is_better": null,
+            "missing_value_meaning": null,
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 16,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Amount ($m)",
+          "logical_name": "cost_amount_millions",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "The cost incurred in millions of dollars.",
+            "unit": "$m",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": false,
+            "missing_value_meaning": "0 cost assumed",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.0,
+            "max": 80.0,
+            "mean": 2.9,
+            "median": 0.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.02,
+              "n_outliers": 1,
+              "top_1_outlier": 80.0
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Costs (excluding construction)",
+        "block_id": "assumptions.costs",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "C17:V20"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": [
+        "Quarter Number"
+      ],
+      "child_key": [
+        "Quarter Number"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T1",
+      "child_table_id": "T3",
+      "parent_key": [
+        "Quarter Number"
+      ],
+      "child_key": [
+        "Quarter Number"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "n_tables": 3,
+    "n_relations": 2,
+    "notes": "Derived highly normalized schema by unwiveling wide financial period inputs from horizontal matrix structures into clean dimension and fact tables (Time, Sales, Costs). Removed cosmetic sheets and formatting headers."
+  }
+}

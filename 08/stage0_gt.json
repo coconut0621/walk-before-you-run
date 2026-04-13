@@ -1,0 +1,908 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Depots",
+      "logical_name": "depots",
+      "n_rows": 9,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "depot_id",
+          "logical_name": "depot_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique code for each service depot (A–I).",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no depot record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "depot_name",
+          "logical_name": "depot_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Human-readable depot label.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "depot name missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "capacity_vehicles",
+          "logical_name": "capacity_vehicles",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Maximum number of vehicles that can be serviced at the depot during the planning period.",
+            "unit": "vehicles",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              2700
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "capacity not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 100,
+            "max": 2700,
+            "mean": 700,
+            "median": 400,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.1111111111111111,
+              "n_outliers": 1,
+              "top_1_outlier": 2700.0
+            }
+          }
+        }
+      ],
+      "sample_rows": [
+        {
+          "depot_id": "A",
+          "depot_name": "Depot A",
+          "capacity_vehicles": 2700
+        },
+        {
+          "depot_id": "B",
+          "depot_name": "Depot B",
+          "capacity_vehicles": 400
+        },
+        {
+          "depot_id": "C",
+          "depot_name": "Depot C",
+          "capacity_vehicles": 100
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Depot capacity",
+        "block_id": "assumptions.depot_capacity",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "H26:P27"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "DepotDistances",
+      "logical_name": "depot_distances",
+      "n_rows": 36,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "distance_id",
+          "logical_name": "distance_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique identifier for a depot pair distance record.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no distance record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "depot_from",
+          "logical_name": "depot_from_id",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Origin depot code for the distance record (as listed in the matrix rows).",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "origin depot missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "depot_to",
+          "logical_name": "depot_to_id",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Destination depot code for the distance record (as listed in the matrix columns).",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "destination depot missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "distance_miles",
+          "logical_name": "distance_miles",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "One-way driving distance between the two depots, in miles.",
+            "unit": "miles",
+            "value_type": "continuous",
+            "expected_range": [
+              0.0,
+              1150.65
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "distance missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 285.0,
+            "max": 1150.65,
+            "mean": 722.9116666666666,
+            "median": 756.355,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "sample_rows": [
+        {
+          "distance_id": "B_A",
+          "depot_from": "B",
+          "depot_to": "A",
+          "distance_miles": 482.0
+        },
+        {
+          "distance_id": "C_A",
+          "depot_from": "C",
+          "depot_to": "A",
+          "distance_miles": 417.0
+        },
+        {
+          "distance_id": "C_B",
+          "depot_from": "C",
+          "depot_to": "B",
+          "distance_miles": 381.49
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Driving distance between each pair of depots (one way, in miles)",
+        "block_id": "assumptions.depot_distances",
+        "extraction_kind": "lower_triangle_matrix_to_edge_table",
+        "cell_region": "E32:P41"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "Scenarios",
+      "logical_name": "scenarios",
+      "n_rows": 4,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "scenario_id",
+          "logical_name": "scenario_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Scenario identifier used in planning inputs (e.g., 1a, 1b, 2a, 2b).",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no scenario record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "scenario_name",
+          "logical_name": "scenario_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Human-readable scenario label.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "scenario name missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "notes",
+          "logical_name": "scenario_notes",
+          "dtype": "string",
+          "role": "free_text",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Short description of how depots are grouped into hubs in the scenario.",
+            "unit": "",
+            "value_type": "text",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "notes missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "sample_rows": [
+        {
+          "scenario_id": "1a",
+          "scenario_name": "Scenario 1a",
+          "notes": "Three hubs; demand values by depot."
+        },
+        {
+          "scenario_id": "1b",
+          "scenario_name": "Scenario 1b",
+          "notes": "Two hubs; demand values by depot."
+        },
+        {
+          "scenario_id": "2a",
+          "scenario_name": "Scenario 2a",
+          "notes": "Three hubs; lower overall demand."
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Vehicles for service and hub groupings",
+        "block_id": "assumptions.scenarios",
+        "extraction_kind": "paired_rows_to_scenario_dimension",
+        "cell_region": "D14:P24"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "Hubs",
+      "logical_name": "hubs",
+      "n_rows": 3,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "hub_code",
+          "logical_name": "hub_code",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Hub label used to group depots for allocation (e.g., Hub 1).",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no hub record",
+            "allowed_categories": [
+              "Hub 1",
+              "Hub 2",
+              "Hub 3"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "hub_number",
+          "logical_name": "hub_number",
+          "dtype": "integer",
+          "role": "id",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric hub index extracted from the hub label.",
+            "unit": "",
+            "value_type": "integer",
+            "expected_range": [
+              1,
+              3
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "hub number missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 3,
+            "mean": 2,
+            "median": 2,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "sample_rows": [
+        {
+          "hub_code": "Hub 1",
+          "hub_number": 1
+        },
+        {
+          "hub_code": "Hub 2",
+          "hub_number": 2
+        },
+        {
+          "hub_code": "Hub 3",
+          "hub_number": 3
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Vehicles for service and hub groupings",
+        "block_id": "assumptions.hubs",
+        "extraction_kind": "distinct_values_from_hub_allocation_rows",
+        "cell_region": "D15:P24"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "ScenarioDepotInputs",
+      "logical_name": "scenario_depot_inputs",
+      "n_rows": 36,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "scenario_depot_id",
+          "logical_name": "scenario_depot_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unique identifier for the (scenario, depot) input record.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no scenario-depot record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "scenario_id",
+          "logical_name": "scenario_id",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Scenario identifier for this depot input row.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "scenario missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "depot_id",
+          "logical_name": "depot_id",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Depot code (A–I) for this input row.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "depot missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "vehicles_for_service",
+          "logical_name": "vehicles_for_service",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of vehicles initially delivered to the depot for service in the scenario.",
+            "unit": "vehicles",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              2438
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "vehicle count missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 88,
+            "max": 2438,
+            "mean": 674,
+            "median": 532,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.08333333333333333,
+              "n_outliers": 3,
+              "top_1_outlier": 2438.0
+            }
+          }
+        },
+        {
+          "physical_name": "hub_code",
+          "logical_name": "hub_code",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Hub assignment for the depot in the scenario (allocation is performed within each hub independently).",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "hub assignment missing",
+            "allowed_categories": [
+              "Hub 1",
+              "Hub 2",
+              "Hub 3"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "sample_rows": [
+        {
+          "scenario_depot_id": "1a_A",
+          "scenario_id": "1a",
+          "depot_id": "A",
+          "vehicles_for_service": 2438,
+          "hub_code": "Hub 1"
+        },
+        {
+          "scenario_depot_id": "1a_B",
+          "scenario_id": "1a",
+          "depot_id": "B",
+          "vehicles_for_service": 544,
+          "hub_code": "Hub 1"
+        },
+        {
+          "scenario_depot_id": "1a_C",
+          "scenario_id": "1a",
+          "depot_id": "C",
+          "vehicles_for_service": 121,
+          "hub_code": "Hub 1"
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Vehicles for service and hub groupings",
+        "block_id": "assumptions.scenario_depot_inputs",
+        "extraction_kind": "paired_rows_wide_to_long_fact_table",
+        "cell_region": "H13:P24"
+      }
+    },
+    {
+      "table_id": "T6",
+      "physical_name": "Parameters",
+      "logical_name": "parameters",
+      "n_rows": 3,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "param_id",
+          "logical_name": "parameter_id",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Machine-friendly identifier for a planning parameter.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no parameter record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "param_name",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Human-readable parameter name as shown in the workbook.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "parameter name missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "value",
+          "logical_name": "parameter_value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric value of the parameter. Note: some costs may be represented with a negative sign in the workbook to indicate an expense.",
+            "unit": "USD",
+            "value_type": "continuous",
+            "expected_range": [
+              -500.0,
+              2000.0
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "value missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": -500.0,
+            "max": 2000.0,
+            "mean": 500.4666666666667,
+            "median": 1.4,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "unit",
+          "logical_name": "parameter_unit",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit associated with the parameter.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "sample_rows": [
+        {
+          "param_id": "revenue_per_vehicle",
+          "param_name": "Revenue per vehicle",
+          "value": 2000.0,
+          "unit": "USD per vehicle"
+        },
+        {
+          "param_id": "penalty_unserviced_vehicle",
+          "param_name": "Penalty for unserviced vehicle",
+          "value": -500.0,
+          "unit": "USD per vehicle"
+        },
+        {
+          "param_id": "transport_cost_per_mile",
+          "param_name": "Transport costs",
+          "value": 1.4,
+          "unit": "USD per vehicle-mile"
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Other revenue and cost assumptions",
+        "block_id": "assumptions.parameters",
+        "extraction_kind": "vertical_key_value_table",
+        "cell_region": "D47:H49"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": [
+        "depot_id"
+      ],
+      "child_key": [
+        "depot_from"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T1",
+      "child_table_id": "T2",
+      "parent_key": [
+        "depot_id"
+      ],
+      "child_key": [
+        "depot_to"
+      ]
+    },
+    {
+      "relation_id": "R3",
+      "parent_table_id": "T3",
+      "child_table_id": "T5",
+      "parent_key": [
+        "scenario_id"
+      ],
+      "child_key": [
+        "scenario_id"
+      ]
+    },
+    {
+      "relation_id": "R4",
+      "parent_table_id": "T1",
+      "child_table_id": "T5",
+      "parent_key": [
+        "depot_id"
+      ],
+      "child_key": [
+        "depot_id"
+      ]
+    },
+    {
+      "relation_id": "R5",
+      "parent_table_id": "T4",
+      "child_table_id": "T5",
+      "parent_key": [
+        "hub_code"
+      ],
+      "child_key": [
+        "hub_code"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Planning inputs for allocating vehicle servicing across a network of depots, including depot capacities, inter-depot driving distances, demand scenarios with hub groupings, and financial/transport parameters.",
+    "n_tables": 6,
+    "notes": "Depots is the master list of service locations with capacities. DepotDistances provides one-way distances for unique depot pairings. ScenarioDepotInputs lists, for each scenario and depot, the incoming vehicle volume and the hub grouping used to constrain allocation. Parameters stores shared constants such as revenue, penalty, and transport cost."
+  }
+}

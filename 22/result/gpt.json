@@ -1,0 +1,1031 @@
+{
+  "tables": [
+    {
+      "table_id": "T1",
+      "physical_name": "Periods",
+      "logical_name": "periods",
+      "n_rows": 17,
+      "profile": {
+        "density": 0.9804
+      },
+      "columns": [
+        {
+          "physical_name": "Quarter Number",
+          "logical_name": "quarter_number",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Quarter index used across the model assumptions timeline.",
+            "unit": "quarter",
+            "value_type": "id",
+            "expected_range": [
+              0,
+              16
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no period record",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 16,
+            "mean": 8.0,
+            "median": 8.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Period Start",
+          "logical_name": "period_start",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": true,
+          "dictionary": {
+            "plain_description": "Calendar start date of the quarter.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "start date not provided for quarter 0 in the workbook",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Period End",
+          "logical_name": "period_end",
+          "dtype": "date",
+          "role": "timestamp",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Calendar end date of the quarter.",
+            "unit": "date",
+            "value_type": "timestamp",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "period end missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": 1.0,
+            "format_hint": "YYYY-MM-DD",
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Quarter Number",
+        "block_id": "assumptions.period_grid",
+        "extraction_kind": "wide_single_measure_to_entity_table",
+        "cell_region": "E5:AB7"
+      }
+    },
+    {
+      "table_id": "T2",
+      "physical_name": "HouseCategories",
+      "logical_name": "house_categories",
+      "n_rows": 4,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Category",
+          "logical_name": "category",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "House category label used throughout the model.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no category record",
+            "allowed_categories": [
+              "Category A",
+              "Category B",
+              "Category C",
+              "Category D"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Size",
+          "logical_name": "size_sq_metres",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Floor area for the house category.",
+            "unit": "sq metres",
+            "value_type": "integer",
+            "expected_range": [
+              50,
+              95
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "size not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 50,
+            "max": 95,
+            "mean": 70.0,
+            "median": 67.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Construction cost",
+          "logical_name": "construction_cost_per_sq_metre",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Construction cost per square metre for the house category.",
+            "unit": "$ per sq metre",
+            "value_type": "continuous",
+            "expected_range": [
+              2300,
+              2600
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "construction cost not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 2300,
+            "max": 2600,
+            "mean": 2450.0,
+            "median": 2450.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Sales price",
+          "logical_name": "sales_price",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Sales price per completed house in the category.",
+            "unit": "$",
+            "value_type": "continuous",
+            "expected_range": [
+              250000,
+              500000
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "sales price not recorded",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 250000,
+            "max": 500000,
+            "mean": 346250.0,
+            "median": 317500.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Construction costs",
+        "block_id": "assumptions.house_category_attributes",
+        "extraction_kind": "rectangular_table",
+        "cell_region": "D11:H16"
+      }
+    },
+    {
+      "table_id": "T3",
+      "physical_name": "HouseConstructionSchedule",
+      "logical_name": "house_construction_schedule",
+      "n_rows": 64,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "ConstructionScheduleID",
+          "logical_name": "construction_schedule_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Generated row identifier for the normalized house construction schedule.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              64
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no schedule row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 64,
+            "mean": 32.5,
+            "median": 32.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Category",
+          "logical_name": "category",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "House category being constructed in the quarter.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "category not linked",
+            "allowed_categories": [
+              "Category A",
+              "Category B",
+              "Category C",
+              "Category D"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Quarter Number",
+          "logical_name": "quarter_number",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Quarter when construction occurs.",
+            "unit": "quarter",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              16
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "quarter not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 16,
+            "mean": 8.5,
+            "median": 8.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "House construction",
+          "logical_name": "houses_constructed",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of houses of the category constructed in the quarter.",
+            "unit": "# houses",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              200
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "construction quantity missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 200,
+            "mean": 25.46875,
+            "median": 0.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "House construction and sales",
+        "block_id": "assumptions.house_construction_schedule",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "D20:AB24"
+      }
+    },
+    {
+      "table_id": "T4",
+      "physical_name": "HouseSalesSchedule",
+      "logical_name": "house_sales_schedule",
+      "n_rows": 64,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "SalesScheduleID",
+          "logical_name": "sales_schedule_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Generated row identifier for the normalized house sales schedule.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              64
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no schedule row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 64,
+            "mean": 32.5,
+            "median": 32.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Category",
+          "logical_name": "category",
+          "dtype": "string",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "House category being sold in the quarter.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "category not linked",
+            "allowed_categories": [
+              "Category A",
+              "Category B",
+              "Category C",
+              "Category D"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Quarter Number",
+          "logical_name": "quarter_number",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Quarter when house sales occur.",
+            "unit": "quarter",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              16
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "quarter not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 16,
+            "mean": 8.5,
+            "median": 8.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "House sales",
+          "logical_name": "houses_sold",
+          "dtype": "integer",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Number of houses of the category sold in the quarter.",
+            "unit": "# houses",
+            "value_type": "integer",
+            "expected_range": [
+              0,
+              160
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "sales quantity missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 160,
+            "mean": 25.46875,
+            "median": 0.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "House construction and sales",
+        "block_id": "assumptions.house_sales_schedule",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "D26:AB30"
+      }
+    },
+    {
+      "table_id": "T5",
+      "physical_name": "NonConstructionCostSchedule",
+      "logical_name": "non_construction_cost_schedule",
+      "n_rows": 64,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "NonConstructionCostID",
+          "logical_name": "non_construction_cost_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Generated row identifier for the normalized non-construction cost schedule.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              64
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no cost row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 64,
+            "mean": 32.5,
+            "median": 32.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Cost item",
+          "logical_name": "cost_item",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Named cost line item excluding direct construction costs.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "cost item missing",
+            "allowed_categories": [
+              "Land purchase",
+              "Earthworks",
+              "Pre-construction costs",
+              "Other costs"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Quarter Number",
+          "logical_name": "quarter_number",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Quarter when the cost is incurred.",
+            "unit": "quarter",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              16
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "quarter not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 16,
+            "mean": 8.5,
+            "median": 8.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Cost amount",
+          "logical_name": "amount_millions",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Quarterly non-construction cost amount for the line item.",
+            "unit": "$m",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              80
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "cost amount missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 80,
+            "mean": 2.9296875,
+            "median": 0.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Costs (excluding construction)",
+        "block_id": "assumptions.non_construction_costs",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "D34:AB37"
+      }
+    },
+    {
+      "table_id": "T6",
+      "physical_name": "EquityDrawdowns",
+      "logical_name": "equity_drawdowns",
+      "n_rows": 16,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "DrawdownID",
+          "logical_name": "drawdown_id",
+          "dtype": "integer",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Generated row identifier for the normalized equity drawdown schedule.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              16
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "no drawdown row",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 16,
+            "mean": 8.5,
+            "median": 8.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Quarter Number",
+          "logical_name": "quarter_number",
+          "dtype": "integer",
+          "role": "foreign_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Quarter when equity is drawn.",
+            "unit": "quarter",
+            "value_type": "id",
+            "expected_range": [
+              1,
+              16
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "quarter not linked",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 1,
+            "max": 16,
+            "mean": 8.5,
+            "median": 8.5,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": {
+              "outlier_rate": 0.0,
+              "n_outliers": 0,
+              "top_1_outlier": null
+            }
+          }
+        },
+        {
+          "physical_name": "Equity drawdowns",
+          "logical_name": "equity_drawdown_millions",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": false,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Quarterly equity drawdown amount.",
+            "unit": "$m",
+            "value_type": "continuous",
+            "expected_range": [
+              0,
+              10
+            ],
+            "higher_is_better": null,
+            "missing_value_meaning": "drawdown amount missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0,
+            "max": 10,
+            "mean": 2.5,
+            "median": 0.0,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Financing costs",
+        "block_id": "assumptions.equity_drawdowns",
+        "extraction_kind": "wide_single_measure_to_long_fact_table",
+        "cell_region": "D41:AB41"
+      }
+    },
+    {
+      "table_id": "T7",
+      "physical_name": "FinancingParameters",
+      "logical_name": "financing_parameters",
+      "n_rows": 5,
+      "profile": {
+        "density": 1.0
+      },
+      "columns": [
+        {
+          "physical_name": "Parameter",
+          "logical_name": "parameter_name",
+          "dtype": "string",
+          "role": "primary_key",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Named financing assumption from the assumptions sheet.",
+            "unit": "",
+            "value_type": "id",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "no parameter record",
+            "allowed_categories": [
+              "Equity - % of funding (only used for questions 8 - 10)",
+              "Interest rate",
+              "Arranging fee (use this for questions 1-3)",
+              "Arranging fee rate  (use this for question 4 onward)",
+              "Commitment fee rate"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Value",
+          "logical_name": "parameter_value",
+          "dtype": "float",
+          "role": "numeric_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Numeric value of the financing assumption.",
+            "unit": "mixed",
+            "value_type": "continuous",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "parameter value missing",
+            "allowed_categories": null
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": 0.0125,
+            "max": 5,
+            "mean": 1.0605,
+            "median": 0.07,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        },
+        {
+          "physical_name": "Units",
+          "logical_name": "unit_label",
+          "dtype": "string",
+          "role": "categorical_feature",
+          "is_unique": true,
+          "is_nullable": false,
+          "dictionary": {
+            "plain_description": "Unit label attached to the financing assumption value.",
+            "unit": "",
+            "value_type": "categorical",
+            "expected_range": null,
+            "higher_is_better": null,
+            "missing_value_meaning": "unit not shown",
+            "allowed_categories": [
+              "[%]",
+              "[% p.a.]",
+              "[$m]",
+              "[% of facility]",
+              "[% of undrawn facility p.a.]"
+            ]
+          },
+          "profile": {
+            "parse_success_rate": 1.0,
+            "type_consistency": 1.0,
+            "min": null,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "format_consistency": null,
+            "format_hint": null,
+            "outlier": null
+          }
+        }
+      ],
+      "source_ref": {
+        "sheet_name": "Assumptions",
+        "anchor_text": "Debt facility costs",
+        "block_id": "assumptions.financing_parameters",
+        "extraction_kind": "parameter_block_to_table",
+        "cell_region": "D43:L49"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "relation_id": "R1",
+      "parent_table_id": "T1",
+      "child_table_id": "T3",
+      "parent_key": [
+        "Quarter Number"
+      ],
+      "child_key": [
+        "Quarter Number"
+      ]
+    },
+    {
+      "relation_id": "R2",
+      "parent_table_id": "T2",
+      "child_table_id": "T3",
+      "parent_key": [
+        "Category"
+      ],
+      "child_key": [
+        "Category"
+      ]
+    },
+    {
+      "relation_id": "R3",
+      "parent_table_id": "T1",
+      "child_table_id": "T4",
+      "parent_key": [
+        "Quarter Number"
+      ],
+      "child_key": [
+        "Quarter Number"
+      ]
+    },
+    {
+      "relation_id": "R4",
+      "parent_table_id": "T2",
+      "child_table_id": "T4",
+      "parent_key": [
+        "Category"
+      ],
+      "child_key": [
+        "Category"
+      ]
+    },
+    {
+      "relation_id": "R5",
+      "parent_table_id": "T1",
+      "child_table_id": "T5",
+      "parent_key": [
+        "Quarter Number"
+      ],
+      "child_key": [
+        "Quarter Number"
+      ]
+    },
+    {
+      "relation_id": "R6",
+      "parent_table_id": "T1",
+      "child_table_id": "T6",
+      "parent_key": [
+        "Quarter Number"
+      ],
+      "child_key": [
+        "Quarter Number"
+      ]
+    }
+  ],
+  "dataset_summary": {
+    "plain_description": "Quarterly development-model assumptions for a residential housing project, normalized from wide Excel input blocks into period, category, schedule, cost, and financing tables.",
+    "n_tables": 7,
+    "notes": "The Assumptions sheet is the substantive source. Quarter 0 has a period end but no explicit period start in the workbook. Wide quarterly rows were normalized into long fact tables for construction, sales, non-construction costs, and equity drawdowns."
+  }
+}
