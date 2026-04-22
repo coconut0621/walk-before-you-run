@@ -1,16 +1,16 @@
-# Walk Before You Run: TOBENAMED Dataset Understanding Matters for Data Analysis Tools
+# Walk Before You Run: Data Exploration as an Explicit Phase for LLM Data Analysis
 
 This repository contains the code, prompts, schemas, datasets, and evaluation pipeline for the paper:
 
-**Walk Before You Run: TOBENAMED Dataset Understanding Matters for Data Analysis Tools**
+**Walk Before You Run: Data Exploration as an Explicit Phase for LLM Data Analysis**
 
 ## Overview
 
-We study **TOBENAMED dataset understanding**, the pre-analysis step in which a tool must infer the logical structure of an uploaded workbook before answering downstream questions.
+We study **Data Exploration**, the pre-analysis step in which a tool must infer the logical structure of an uploaded workbook before answering downstream questions.
 
 This repository includes:
 
-- the TOBENAMED prompting contract for workbook understanding
+- the Data Exploration prompting contract for workbook understanding
 - the JSON schema template for TOBENAMED outputs
 - an OpenAI-based pipeline for running workbook-to-JSON inference
 - an automatic evaluator for TOBENAMED predictions
@@ -42,7 +42,7 @@ This repository includes:
 Each task folder should contain:
 
 * one or more workbook files (`*.xlsx`)
-* one `stage0_gt.json` file
+* one `stage0_gt.json` file, which is the ground truth for the Data Exploration step
 
 ## Environment
 
