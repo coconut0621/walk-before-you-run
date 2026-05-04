@@ -1,8 +1,8 @@
-# Walk Before You Run: Data Exploration as an Explicit Phase for LLM Data Analysis
+# Walk Before You Run: The Importance of Data Exploration for Data Analysis Agents.
 
 This repository contains the code, prompts, schemas, datasets, and evaluation pipeline for the paper:
 
-**Walk Before You Run: Data Exploration as an Explicit Phase for LLM Data Analysis**
+**Walk Before You Run: The Importance of Data Exploration for Data Analysis Agents**
 
 ## Overview
 
