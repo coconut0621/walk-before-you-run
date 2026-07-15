@@ -11,9 +11,9 @@ We study **Data Exploration**, the pre-analysis step in which a tool must infer 
 This repository includes:
 
 - the Data Exploration prompting contract for workbook understanding
-- the JSON schema template for TOBENAMED outputs
+- the JSON schema template for Data Exploration outputs
 - an OpenAI-based pipeline for running workbook-to-JSON inference
-- an automatic evaluator for TOBENAMED predictions
+- an automatic evaluator for Data Exploration predictions
 - a bulk scoring script for benchmarking predictions across task folders
 - task folders with ground-truth metadata, workbook inputs, and test results
 
@@ -87,7 +87,7 @@ python run_model_pipeline.py --api-key YOUR_API_KEY
 
 but using environment variables is safer.
 
-## Running the Stage-0 inference pipeline
+## Running the Data Exploration inference pipeline
 
 The main testing script is:
 
@@ -107,7 +107,7 @@ This script expects the root directory to contain:
 * `sample_xlsx.json`
 * task subfolders such as `01/`, `02/`, etc.
 
-For each task, the script reads the workbook(s), builds the prompt, calls the model, and saves the predicted Stage-0 JSON to:
+For each task, the script reads the workbook(s), builds the prompt, calls the model, and saves the predicted Data Exploration JSON to:
 
 ```text
 <task>/result/<name>.json
@@ -150,13 +150,13 @@ python bulk_score_xlsx_dir.py --dir . --summary-mode both
 
 ### `run_model_pipeline.py`
 
-Runs an OpenAI model on workbook-based Stage-0 tasks using structured JSON outputs.
+Runs an OpenAI model on workbook-based Data Exploration tasks using structured JSON outputs.
 
 Current implementation is built for OpenAI models via the Responses API.
 
 ### `evaluation_xlsx_source_ref.py`
 
-Evaluates Stage-0 predictions against ground truth with source-ref-aware matching, column/relation scoring, profiling checks, outlier checks, and summary scoring.
+Evaluates Data Exploration predictions against ground truth with source-ref-aware matching, column/relation scoring, profiling checks, outlier checks, and summary scoring.
 
 ### `eval_dataset_summary_llm.py`
 
@@ -170,7 +170,7 @@ Bulk scoring script for running the evaluator across all task folders and collec
 
 The provided inference pipeline (`run_model_pipeline.py`) is currently implemented for OpenAI models.
 
-However, the evaluator is **model-agnostic** as long as a tool produces prediction files in the same Stage-0 JSON format.
+However, the evaluator is **model-agnostic** as long as a tool produces prediction files in the same Data Exploration JSON format.
 
 To evaluate another tool without this pipeline, you can:
 
@@ -191,7 +191,7 @@ The evaluator will score them in the same way.
 ## Notes
 
 * `sample_xlsx.json` is a format template only, not a content template.
-* `prompt_xlsx.md` defines the Stage-0 workbook understanding task.
+* `prompt_xlsx.md` defines the Data Exploration workbook understanding task.
 * The evaluator assumes that predictions follow the same high-level JSON structure as `sample_xlsx.json`.
 
 ## Citation
